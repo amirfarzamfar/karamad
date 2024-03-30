@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Resume extends Model
+class User_data extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory , InteractsWithMedia;
 
     protected $fillable = [
+        'name',
+        'family',
         'gender',
         'marital_status',
         'year_of_birth',
@@ -20,7 +24,6 @@ class Resume extends Model
         'city',
         'address',
         'about_me',
-        'jobCategory_id',
         'user_id'
     ];
 }

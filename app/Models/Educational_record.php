@@ -4,17 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Educational_record extends Model
 {
-    use HasFactory;
+    use HasFactory , SoftDeletes;
 
     protected $fillable = [
-        'resume_id',
+        'user_data_id',
         'grade',
         'field_of_study',
         'university_name',
-        'entering_name',
-        'graduation_year'
+        'entering_year',
+        'graduation_year',
+        'currently_studying'
     ];
 }

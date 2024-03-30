@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('terms', function (Blueprint $table) {
-            $table->string('description');
+        Schema::create('user_data_category', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_data_id');
+            $table->integer('category_id');
+            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('terms', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('resume_category');
     }
 };

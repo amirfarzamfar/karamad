@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('karamad_tips', function (Blueprint $table) {
+        Schema::create('social_networks', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->foreignId('user_data_id');
+            $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
+            $table->char('email_id');
+            $table->char('github_id');
+            $table->char('linkedin_id');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('karamad_tips');
+        Schema::dropIfExists('social_networks');
     }
 };

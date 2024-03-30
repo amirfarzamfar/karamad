@@ -14,7 +14,7 @@ class TipsCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        $path = $this->currentPage();
+
 
         return [
 
