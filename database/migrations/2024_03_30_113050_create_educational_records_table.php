@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('grade');
             $table->string('field_of_study');
             $table->string('university_name');
-            $table->timestamp('entering_year')->nullable();
-            $table->timestamp('graduation_year')->nullable();
+            $table->date('entering_year')->nullable();
+            $table->date('graduation_year')->nullable();
             $table->enum('currently_studying',['yes' , null])->nullable()->default(null);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

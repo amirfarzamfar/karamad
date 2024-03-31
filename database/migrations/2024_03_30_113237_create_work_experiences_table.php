@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
             $table->string('job_title');
             $table->string('organization_name');
-            $table->timestamp('start_of_work')->nullable();
-            $table->timestamp('end_of_work')->nullable();
+            $table->date('start_of_work')->nullable();
+            $table->date('end_of_work')->nullable();
             $table->enum('currently_employed',['employed','unemployed']);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Skill extends Model
@@ -15,4 +16,9 @@ class Skill extends Model
         'skill_name',
         'skill_percentage'
     ];
+
+    public function user_data(): BelongsTo
+    {
+        return $this->belongsTo(User_data::class);
+    }
 }

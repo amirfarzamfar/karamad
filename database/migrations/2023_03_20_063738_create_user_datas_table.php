@@ -16,8 +16,8 @@ return new class extends Migration
             $table->char('name');
             $table->char('family');
             $table->enum('gender', ['male','female']);
-            $table->enum('marital_status',['married ','single']);
-            $table->timestamp('year_of_birth');
+                $table->enum('marital_status',['married ','single']);
+            $table->date('year_of_birth')->nullable();
             $table->enum('military_exemption',['Exempt','Not Exempt']);
             $table->string('email');
             $table->string('phone_number');
