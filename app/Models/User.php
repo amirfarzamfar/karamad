@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $guarded = [];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+
+
+
+    public function is_phone_verified()
+    {
+        return !is_null($this->phone_number_verified_at);
+    }
+
+   public function  phone_number_verified_at()
+    {
+        return $this->forceFill([
+            'phone_number_verified_at' => $this->freshTimestamp()
+        ])->save();
+    }
+
+    public function reset_pass_verified_at()
+    {
+        return $this->forceFill([
+            'reset_pass_verified_at' => $this->freshTimestamp()
+        ])->save();
+    }
+
+    public function is_reset_verified(): bool
+    {
+        return !is_null($this->reset_pass_verified_at);
+    }
+
+    public function undo_reset_pass_verified()
+    {
+        return $this->forceFill([
+            'reset_pass_verified_at' => null
+        ])->save();
+    }
+
+
+    public function job_ad()
+    {
+        return $this->hasMany(Job_ad::class);
+    }
+}
