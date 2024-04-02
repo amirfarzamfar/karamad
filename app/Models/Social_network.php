@@ -13,7 +13,7 @@ class Social_network extends Model
 
     protected $fillable = [
         'user_data_id',
-        'email_id',
+        'instagram_id',
         'github_id',
         'linkedin_id'
     ];

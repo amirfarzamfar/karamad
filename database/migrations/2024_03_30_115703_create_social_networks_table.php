@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_data_id');
             $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
-            $table->char('email_id');
+            $table->char('instagram_id');
             $table->char('github_id');
             $table->char('linkedin_id');
             $table->timestamps();

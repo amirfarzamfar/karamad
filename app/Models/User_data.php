@@ -29,12 +29,12 @@ class User_data extends Model implements HasMedia
         'user_id'
     ];
 
-    public function user(): BelongsTo
+    public function user(): BelongsTo //
     {
         return $this->belongsTo(User::class);
     }
 
-    public function educational_records(): HasMany
+    public function educational_records(): HasMany //
     {
         return $this->hasMany(Educational_record::class);
     }
@@ -44,17 +44,17 @@ class User_data extends Model implements HasMedia
        return $this->hasMany(Personal_resume::class);
     }
 
-    public function skills(): HasMany
+    public function skills(): HasMany //
     {
       return $this->hasMany(Skill::class);
     }
 
-    public function social_networks(): HasMany
+    public function social_networks(): HasMany //
     {
         return  $this->hasMany(Social_network::class);
     }
 
-    public function work_experiences(): HasMany
+    public function work_experiences(): HasMany //
     {
         return $this->hasMany(Work_experience::class);
     }
