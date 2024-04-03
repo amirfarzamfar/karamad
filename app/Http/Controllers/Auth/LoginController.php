@@ -14,15 +14,19 @@ class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request)
     {
+
         $user = User::where('phone_number', $request->validated('input'))
             ->orWhere('email', $request->validated('input'))
             ->first();
+
 
         if (!$user || !Hash::check($request->validated('password'), $user->password)) {
             throw ValidationException::withMessages([
                 'message' => 'Incorrect inputs.'
             ]);
         }
+
+
 
 
 

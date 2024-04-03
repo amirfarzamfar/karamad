@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\JobSeeker;
 
+use App\Http\Controllers\Auth\EditUserController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Controller;
 use App\Models\Job_ad;
 use App\Models\User;
@@ -9,14 +11,18 @@ use Illuminate\Http\Request;
 
 class ProfileSidebarController extends Controller
 {
-    public function editProfile(){
+    public function editProfile()
+    {
 
     }
 
     public function sideBar()
     {
-        self::markedAd();
-
+        $markedAd = self::markedAd();
+        $postedResume = self::postedResume();
+        $logout = new LogoutController();
+        $editUser = new EditUserController();
+        $editUser->edit_user_profile();
 
     }
 
@@ -38,18 +44,18 @@ class ProfileSidebarController extends Controller
     }
 
 
-    public function postedResume(){
+    public function postedResume()
+    {
         $user = User::find(1);
 
         $resumes = $user->resumes;
 
-        foreach ($resumes as $resume)
-        {
+        foreach ($resumes as $resume) {
             $jobAds = $resume->jobAds;
 
-            foreach ($jobAds as $jobAd){
+            foreach ($jobAds as $jobAd) {
 
-        }
+            }
         }
 
     }

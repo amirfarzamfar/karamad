@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleAuthControlller;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,8 @@ Route::get("/auth" , function (){
     $user = \App\Models\User::whereEmail('amir@gmail.com')->first();
     Auth::login($user,true);
 });
+
+Route::get("/login",function (){
+    return Socialite::driver('google')->redirect();
+});
+Route::get("/google-login",[GoogleAuthControlller::class,'callbackGoogle']);

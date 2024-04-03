@@ -6,6 +6,7 @@ use App\Events\Auth\ResetPasswordEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\PasswordResetCheckRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Models\Phone_number_check;
 use App\Models\PhoneNumbercheck;
 use App\Models\User;
 use Carbon\Carbon;
@@ -19,7 +20,7 @@ class PasswordController extends Controller
 
         if ($user) {
             $code = rand(100000, 999999);
-            PhoneNumbercheck::create([
+            Phone_number_check::create([
                 'phone_number' => $user->phone_number,
                 'password' => $code
             ]);
@@ -41,7 +42,7 @@ class PasswordController extends Controller
     {
 
         $user = User::where('phone_number', $request->validated('phone_number'))->first();
-        $code = PhoneNumbercheck::where('phone_number', $request->validated('phone_number'))->orderByDesc('created_at')->first();
+        $code = Phone_number_check::where('phone_number', $request->validated('phone_number'))->orderByDesc('created_at')->first();
 
         if ($code->created_at->addMinute(3) > Carbon::now()) {
             if ($code->password == $request->validated('code')) {
