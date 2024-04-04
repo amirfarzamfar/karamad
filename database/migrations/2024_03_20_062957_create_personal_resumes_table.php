@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_data_id');
             $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
+            $table->string('unique_name');
             $table->string('name');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CreateResumeController;
 use App\Http\Controllers\ResumeMakerWorkplaceController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WorkplaceController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::get('/', function () {
 
 //work place
 Route::get('/workplace',[WorkplaceController::class , 'index'])->name('user.workplace.Authenticated');
+Route::post('/userProfile' , [UserProfileController::class , 'index'])->name('UserProfile');
 
 Route::get('/ResumeMaker/workplace' , [ResumeMakerWorkplaceController::class , 'index'])->name('ResumeMaker.workplace');
 Route::get('/ResumeMaker/show/userdata' , [CreateResumeController::class , 'index'])->name('ResumeMaker.show');

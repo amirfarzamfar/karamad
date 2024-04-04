@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateResumeRequest;
-use App\Http\Requests\test;
-use App\Http\Resources\ShowUserDataResource;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
 use App\Models\Skill;
 use App\Models\Social_network;
-use App\Models\User;
 use App\Models\User_data;
 use App\Models\Work_experience;
 use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use function Symfony\Component\String\s;
+
+
 
 class CreateResumeController extends Controller
 {
@@ -136,15 +132,18 @@ class CreateResumeController extends Controller
 
             $file = $personalResume['file'];
 
-            $name = time().$file->getClientOriginalName();
+            $unique_name =time().$file->getClientOriginalName();
 
-            $destination = storage_path('app/public/files/' . $name);
+            $name = $file->getClientOriginalName();
+
+            $destination = storage_path('app/public/files/' . $unique_name);
 
             move_uploaded_file($file, $destination);
 
             Personal_resume::create([
                 'user_data_id'=>$user_data->id,
-                'name'=>$name
+                'name'=>$name,
+                'unique_name'=>$unique_name
             ]);
         }
     }
