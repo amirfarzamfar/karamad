@@ -98,7 +98,9 @@ class ResumeMakerWorkplaceController extends Controller
       {
           $resume_name = $personal_resume->name;
 
-          $url = Storage::url($resume_name);
+          $resume_unique_name =  $personal_resume->unique_name;
+
+          $url = Storage::url($resume_unique_name);
 
           $resume []= ['url'=>$url , 'name'=>$resume_name ];
       }

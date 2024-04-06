@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateResumeRequest extends FormRequest
+class ResumeRequest extends FormRequest
 {
 
     /**

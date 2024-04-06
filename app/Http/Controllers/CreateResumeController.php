@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateResumeRequest;
+use App\Http\Requests\ResumeRequest;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
 use App\Models\Skill;
@@ -20,7 +20,7 @@ class CreateResumeController extends Controller
 
     }
 
-    public function create(CreateResumeRequest $request)
+    public function create(ResumeRequest $request)
     {
         try {
             self::createUserData($request);
