@@ -7,10 +7,8 @@ use App\Models\Educational_record;
 use App\Models\Personal_resume;
 use App\Models\Skill;
 use App\Models\Social_network;
-use App\Models\User;
 use App\Models\User_data;
 use App\Models\Work_experience;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ResumeMakerWorkplaceController extends Controller
@@ -100,7 +98,7 @@ class ResumeMakerWorkplaceController extends Controller
 
           $resume_unique_name =  $personal_resume->unique_name;
 
-          $url = Storage::url($resume_unique_name);
+          $url = Storage::url('files/'.$resume_unique_name);
 
           $resume []= ['url'=>$url , 'name'=>$resume_name ];
       }

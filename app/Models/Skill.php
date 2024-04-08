@@ -12,7 +12,8 @@ class Skill extends Model
     use HasFactory , SoftDeletes;
 
     protected $fillable = [
-        'user_data_id',
+        'model',
+        'model_id',
         'skill_name',
         'skill_percentage'
     ];
@@ -20,5 +21,10 @@ class Skill extends Model
     public function user_data(): BelongsTo
     {
         return $this->belongsTo(User_data::class);
+    }
+
+    public function advertisements(): belongsTo
+    {
+        return $this->belongsTo(Advertisement::class);
     }
 }

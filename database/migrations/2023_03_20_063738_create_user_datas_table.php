@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('name');
             $table->char('family');
             $table->enum('gender', ['male','female']);
-                $table->enum('marital_status',['married ','single']);
+            $table->enum('marital_status',['married ','single']);
             $table->date('year_of_birth')->nullable();
             $table->enum('military_exemption',['Exempt','Not Exempt']);
             $table->string('email');
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->text('address');
             $table->text('about_me')->nullable();
+            $table->enum('status',['accepted' , 'not_accepted'])->nullable();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

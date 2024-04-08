@@ -4,22 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ResumeRequest;
 use App\Models\Educational_record;
+use App\Models\Personal_resume;
 use App\Models\Skill;
 use App\Models\Social_network;
 use App\Models\User_data;
 use App\Models\Work_experience;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class UpdateResumeController extends Controller
 {
-    public function update(ResumeRequest $request)
+    public function update(Request $request)
     {
         try {
-            $id = auth()->id();
+            $id = 1;
             $user_data = User_data::where('user_id' , $id)->first();
             $user_data_id= $user_data->id;
             self::updateUserData($request , $user_data_id);
+            self::updateImage($request , $user_data_id);
             self::updateEducationalRecord($request , $user_data_id);
             self::updateSkill($request  , $user_data_id);
             self::updateSocialNetwork($request , $user_data_id);
@@ -86,7 +90,7 @@ class UpdateResumeController extends Controller
         ]);
     }
 
-    public function updateWorkExperience($request , $id) //
+    public function updateWorkExperience($request , $id): void //
     {
 
         $WorkExperiences = $request->workexperince;
@@ -101,5 +105,52 @@ class UpdateResumeController extends Controller
             ]);
         }
     }
+    public function updateImage($request , $id): void
+    {
+        $user_data = User_data::find($id);
+        $mediaItems_status = $user_data->hasMedia();
+      if ($mediaItems_status == true){
+          $mediaItems =  $user_data->getMedia();
+          $mediaItems[0]->delete();
+      }
+        $user_data->addMediaFromRequest('image')->toMediaCollection();
+    }
+
+    public function createPersonalResume($request , $id)
+    {
+        $personalResumes = $request->personalResume;
+
+        foreach ($personalResumes as $personalResume){
+
+            $file = $personalResume['file'];
+
+            $unique_name =time().$file->getClientOriginalName();
+
+            if (Storage::exists('files/' . $unique_name)){}
+
+            $name = $file->getClientOriginalName();
+
+            $destination = storage_path('app/public/files/' . $unique_name);
+
+            move_uploaded_file($file, $destination);
+
+            Personal_resume::create([
+                'user_data_id'=>$id,
+                'name'=>$name,
+                'unique_name'=>$unique_name
+            ]);
+        }
+    }
+// first idea => deleted_at -> !null and if it exists in storage it will be deleted for accept
+//second idea => deleted_at -> !null and if it !exists in storage its deleted_at -> null for not accept
+    public function deletePersonalResume(string $unique_name)
+    {
+        $id = auth()->id();
+        $user_data = User_data::where('user_id' , $id)->first();
+        $user_data_id= $user_data->id;
+        Storage::delete('files/'.$unique_name);
+        Personal_resume::where('user_data_id' , $user_data_id)
+            ->where('unique_name' , $unique_name)
+            ->delete();
+    }
 }
-//update image / update resume & delete resume
