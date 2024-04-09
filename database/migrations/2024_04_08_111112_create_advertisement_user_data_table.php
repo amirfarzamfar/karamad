@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('advertisement_id');
             $table->integer('user_data_id');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

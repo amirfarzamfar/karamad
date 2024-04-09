@@ -10,7 +10,7 @@ class Advertisement_user_data extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $table = ['advertisement_user_data'];
+    protected $table = 'advertisement_user_data';
 
     protected $fillable = [
         'advertisement_id',

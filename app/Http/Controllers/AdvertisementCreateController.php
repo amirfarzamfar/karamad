@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAdRequest;
 use App\Models\Advertisement;
 use App\Models\Organization;
 use App\Models\Skill;
-use Illuminate\Http\Request;
+
 
 class AdvertisementCreateController extends Controller
 {
     protected int $advertisement_id;
 
-    public function create(Request $request)
+    public function create(CreateAdRequest $request)
     {
         try {
             $id = 1;
@@ -44,7 +45,7 @@ class AdvertisementCreateController extends Controller
 
     public function createAdvertisementSkills($request , $id): void
     {
-        $skillRequests = $request->Skill;
+        $skillRequests = $request->skill;
         foreach ($skillRequests as $skillRequest){
             Skill::create([
                 'model'=>'app/model/advertisement',

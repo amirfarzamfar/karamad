@@ -20,7 +20,7 @@ Route::get('/', function () {
     return redirect()->route('user.workplace.Authenticated');
 });
 
-//work place
+//workplace
 Route::get('/workplace',[WorkplaceController::class , 'index'])->name('user.workplace.Authenticated');
 Route::post('/userProfile' , [UserProfileController::class , 'index'])->name('UserProfile');
 
@@ -28,11 +28,12 @@ Route::prefix('resume')->group(function (){
 Route::get('/workplace' , [ResumeMakerWorkplaceController::class , 'index'])->name('user.Resume.workplace');
 Route::get('' , [CreateResumeController::class , 'index'])->name('user.Resume.show');
 Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create');
-Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->name('user.Resume.send');
+Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->name('user.Resume.send')->middleware(['hasResume','sendOnce']);
 Route::patch('/update' , [UpdateResumeController::class, 'update'])->name('user.Resume.update');
 Route::delete('/delete/personalResume/{unique_name}' , [UpdateResumeController::class , 'deletePersonalResume'])->name('user.Resume.PersonalResume.delete');
 });
 
+//advertisement
 Route::prefix('advertisement')->group(function (){
 Route::get('show/{advertisement_id}' , [ShowAdController::class, 'show'])->name('user.advertisement.show');
 Route::post('/create' , [AdvertisementCreateController::class, 'create'])->name('admin.advertisement.create');
