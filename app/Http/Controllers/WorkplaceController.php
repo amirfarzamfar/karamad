@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\WorkplaceCollection;
 use App\Models\About;
+use App\Models\Advertisement;
 use App\Models\Karamad_benefit;
 use App\Models\Karamad_tip;
 use App\Models\Reapeted_question;
-use App\Models\User;
-
-
 
 class WorkplaceController extends Controller
 {
@@ -42,7 +40,15 @@ class WorkplaceController extends Controller
     //
     public function Advertisements()
     {
-        $recentRecords = User::latest()->take(1)->get(['name' , 'family']);
+        $recentRecords = Advertisement::latest()->take(1)->get();
+
+        foreach ($recentRecords as $recentRecord){
+           if($recentRecord->hasMedia()){
+             $image = $recentRecord->getMedia();
+             $Url = $image[0]->getUrl();
+             $recentRecord->setAttribute('avatar_url', $Url);
+           }
+        }
 
         $recentRecords = $recentRecords->sortByDesc('id')->values();
 
@@ -60,6 +66,14 @@ class WorkplaceController extends Controller
     public function Tips()
     {
        $karamad_tips = Karamad_tip::paginate(2);
+
+        foreach ($karamad_tips as $karamad_tip){
+            if($karamad_tip->hasMedia()){
+                $image = $karamad_tip->getMedia();
+                $Url = $image[0]->getUrl();
+                $karamad_tip->setAttribute('avatar_url', $Url);
+            }
+        }
 
        return $karamad_tips;
     }

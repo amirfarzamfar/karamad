@@ -14,7 +14,7 @@ use App\Http\Controllers\WorkplaceController;
 use Illuminate\Support\Facades\Route;
 
 
-//my middlewares hasResume / sendOnce / checkAdmin
+//my middlewares hasResume / sendOnce / checkAdminForAd / checkAdminForResume
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/
@@ -30,9 +30,9 @@ Route::post('/userProfile' , [UserProfileController::class , 'index'])->name('Us
 //resume
 Route::prefix('resume')->group(function (){
 Route::get('/workplace' , [ResumeMakerWorkplaceController::class , 'index'])->name('user.Resume.workplace');
-Route::get('' , [CreateResumeController::class , 'index'])->name('user.Resume.show');
+Route::get('/show' , [CreateResumeController::class , 'index'])->name('user.Resume.show');
 Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create');
-Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->name('user.Resume.send')->middleware(['hasResume','sendOnce']);
+Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->name('user.Resume.send')/*->middleware(['hasResume','sendOnce'])*/;
 Route::patch('/update' , [UpdateResumeController::class, 'update'])->name('user.Resume.update');
 Route::delete('/delete/personalResume/{unique_name}' , [UpdateResumeController::class , 'deletePersonalResume'])->name('user.Resume.PersonalResume.delete');
 });
@@ -40,9 +40,9 @@ Route::delete('/delete/personalResume/{unique_name}' , [UpdateResumeController::
 //advertisement
 Route::prefix('advertisement')->group(function (){
 Route::get('show/{advertisement_id}' , [ShowAdController::class, 'show'])->name('user.advertisement.show');
-Route::get('/show/resumes/{advertisement_id}',[ShowResumesController::class , 'index'])->name('admin.show.resumes');
-Route::get('/show/resume/{resume_id}',[ShowResumeController::class , 'index'])->name('admin.show.resume');
-Route::post('/set/resume/status/{resume_id}', [SetResumeStatusController::class , 'Set'])->name('admin.set.resumeStatus');
+Route::get('/show/resumes/{advertisement_id}',[ShowResumesController::class , 'index'])->name('admin.show.resumes')/*->middleware(['checkAdminForAd'])*/;
+Route::get('/show/resume/{resume_id}',[ShowResumeController::class , 'index'])->name('admin.show.resume')/*->middleware(['checkAdminForResume'])*/;
+Route::post('/set/resume/status/{resume_id}', [SetResumeStatusController::class , 'Set'])->name('admin.set.resumeStatus')/*->middleware(['checkAdminForResume'])*/;
 Route::post('/create' , [AdvertisementCreateController::class, 'create'])->name('admin.advertisement.create');
 });
 
@@ -63,6 +63,6 @@ Route::get('/download',function (){
 
 
 Route::post('/test' , function (\Illuminate\Http\Request $request){
-    \App\Models\User::find(3)->addMediaFromRequest('image')->toMediaCollection();
+    \App\Models\Karamad_tip::find(1)->addMediaFromRequest('image')->toMediaCollection();
 });
 

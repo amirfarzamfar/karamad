@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Advertisement extends Model
+class Advertisement extends Model implements HasMedia
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory , SoftDeletes , InteractsWithMedia;
 
     protected $fillable = [
         'organization_id',
