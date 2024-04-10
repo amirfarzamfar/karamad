@@ -14,6 +14,7 @@ class Advertisement_user_data extends Model
 
     protected $fillable = [
         'advertisement_id',
-        'resume_id'
+        'resume_id',
+        'status'
     ];
 }

@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->text('address');
             $table->text('about_me')->nullable();
-            $table->enum('status',['accepted' , 'not_accepted'])->nullable();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

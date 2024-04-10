@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('advertisement_id');
             $table->integer('user_data_id');
+            $table->enum('status',['accepted' , 'not_accepted'])->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
