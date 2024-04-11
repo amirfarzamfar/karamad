@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\resume;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ShowResumesCollection;
 use App\Models\Advertisement_user_data;
 use App\Models\User;
 use App\Models\User_data;
+use function response;
 
 class ShowResumesController extends Controller
 {

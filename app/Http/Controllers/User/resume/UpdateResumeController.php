@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\resume;
 
-use App\Http\Requests\ResumeRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
 use App\Models\Skill;
@@ -12,6 +12,9 @@ use App\Models\Work_experience;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use function auth;
+use function response;
+use function storage_path;
 
 
 class UpdateResumeController extends Controller

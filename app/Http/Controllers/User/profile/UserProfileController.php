@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\profile;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\UserProfileResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use function auth;
+use function response;
 
 
 class UserProfileController extends Controller

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\resume;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ResumeRequest;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
@@ -10,7 +11,9 @@ use App\Models\Social_network;
 use App\Models\User_data;
 use App\Models\Work_experience;
 use Carbon\Carbon;
-
+use function auth;
+use function response;
+use function storage_path;
 
 
 class CreateResumeController extends Controller
@@ -85,6 +88,7 @@ class CreateResumeController extends Controller
 
         foreach ($skills as $skill){
             Skill::create([
+                'model'=>'app/model/resume',
                 'user_data_id'=>$user_data->id,
                 'skill_name'=>$skill['skill_name'],
                 'skill_percentage'=>$skill['skill_percentage']

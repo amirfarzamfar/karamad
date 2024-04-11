@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\resume;
 
+use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\Advertisement_user_data;
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use function response;
 
 class SetResumeStatusController extends Controller
 {

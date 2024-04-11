@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\resume;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ResumeMakerWorkplaceCollection;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
@@ -10,6 +11,7 @@ use App\Models\Social_network;
 use App\Models\User_data;
 use App\Models\Work_experience;
 use Illuminate\Support\Facades\Storage;
+use function response;
 
 class ResumeMakerWorkplaceController extends Controller
 {
@@ -74,7 +76,7 @@ class ResumeMakerWorkplaceController extends Controller
 
     public function FindSkill($id)
     {
-      return Skill::where('user_data_id' , $id)->get();
+      return Skill::where('model','app/model/resume')->where('user_data_id' , $id)->get(['skill_name','skill_percentage']);
     }
 
     //

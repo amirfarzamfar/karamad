@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\resume;
 
 
 
+use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\User_data;
+use function now;
+use function response;
 
 class SendResumeController extends Controller
 {

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\Advertisement;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\AdvertisementCollection;
 use App\Models\Advertisement;
 use App\Models\Organization;
 use App\Models\Skill;
+
 
 class ShowAdController extends Controller
 {
@@ -32,7 +34,15 @@ class ShowAdController extends Controller
 
     public function showAd($id)
     {
-        return Advertisement::find($id)->get();
+        $advertisements = Advertisement::find($id)->get();
+        if($advertisements[0]->hasMedia()){
+            $image = $advertisements[0]->getMedia();
+            $Url = $image[0]->getUrl();
+            $advertisements[0]->setAttribute('avatar_url', $Url);
+        }else{
+            $advertisements[0]->setAttribute('avatar_url', null);
+        }
+        return $advertisements;
     }
 
     public function findSkills($id)
@@ -47,6 +57,16 @@ class ShowAdController extends Controller
 
     public function allAd($id , $advertisementId)
     {
-        return Advertisement::where('organization_id' , $id)->whereNot('id' , $advertisementId)->get();
+       $advertisements = Advertisement::where('organization_id' , $id)->whereNot('id' , $advertisementId)->get();
+        foreach ($advertisements as $advertisement) {
+            if($advertisement->hasMedia()){
+                $image = $advertisement->getMedia();
+                $Url = $image[0]->getUrl();
+                $advertisement->setAttribute('avatar_url', $Url);
+            }else{
+                $advertisement->setAttribute('avatar_url', null);
+            }
+        }
+        return $advertisements;
     }
 }

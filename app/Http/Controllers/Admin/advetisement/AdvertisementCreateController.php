@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\advetisement;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAdRequest;
 use App\Models\Advertisement;
 use App\Models\Organization;
 use App\Models\Skill;
+use function response;
 
 
 class AdvertisementCreateController extends Controller
