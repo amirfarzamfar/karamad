@@ -1,5 +1,6 @@
 <?php
-use App\Http\Controllers\WorkplaceController;
+
+use App\Http\Controllers\User\workplace\WorkplaceController;
 use Illuminate\Support\Facades\Route;
 
 

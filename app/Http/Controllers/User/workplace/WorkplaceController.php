@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User\workplace;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\WorkplaceCollection;
 use App\Models\About;
 use App\Models\Advertisement;
 use App\Models\Karamad_benefit;
 use App\Models\Karamad_tip;
 use App\Models\Reapeted_question;
+use function response;
 
 class WorkplaceController extends Controller
 {
