@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_resumes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_data_id');
-            $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
-            $table->string('unique_name');
-            $table->string('name');
+        Schema::create('marked_ads', function (Blueprint $table) {
+            $table->char('user_id');
+            $table->char('ads_id');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_resumes');
+        Schema::dropIfExists('marked_ads');
     }
 };

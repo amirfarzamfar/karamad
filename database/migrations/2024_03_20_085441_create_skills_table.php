@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('percentage');
-            $table->foreignId('resume_id');
-            $table->foreign('resume_id')->references('id')->on('resumes')->onDelete('cascade');
+            $table->string('model');
+            $table->integer('model_id');
+            $table->string('skill_name');
+            $table->integer('skill_percentage');
             $table->timestamps();
         });
     }

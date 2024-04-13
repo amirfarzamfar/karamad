@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('educational_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('resume_id');
-            $table->foreign('resume_id')->references('id')->on('resumes')->onDelete('cascade');
+            $table->foreignId('user_data_id');
+            $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
             $table->string('grade');
-            $table->string('field_of_study')->nullable();
-            $table->string('university_name')->nullable();
-            $table->timestamp('entering_name')->nullable();
-            $table->timestamp('graduation_year')->nullable();
+            $table->string('field_of_study');
+            $table->string('university_name');
+            $table->date('entering_year')->nullable();
+            $table->date('graduation_year')->nullable();
+            $table->enum('currently_studying',['yes' , null])->nullable()->default(null);
             $table->timestamps();
         });
     }

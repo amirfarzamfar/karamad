@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\jobAd;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job_ad;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
 class MarkedAdController extends Controller
@@ -12,7 +12,7 @@ class MarkedAdController extends Controller
 
 
         $ids = $request->input('id');
-        $selectedRecords = Job_ad::whereIn('id', $ids)->get();
+        $selectedRecords = Advertisement::whereIn('id', $ids)->get();
         $user = auth()->user();
 
         $user->job_ad()->attach($selectedRecords);

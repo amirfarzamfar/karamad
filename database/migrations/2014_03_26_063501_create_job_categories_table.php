@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
             $table->string('job_category_name')->nullable();
-//            $table->foreignId('job_ad_id');
-//            $table->foreign('job_ad_id')->references('id')->on('job_ads')->onDelete('cascade');
             $table->timestamps();
         });
     }

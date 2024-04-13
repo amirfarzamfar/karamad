@@ -73,8 +73,26 @@ class User extends Authenticatable
     }
 
 
-    public function job_ad()
+    public function advertisements()
     {
-        return $this->hasMany(Job_ad::class);
+        return $this->hasMany(Advertisement::class);
     }
+
+
+    public function organization()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
+//    public function personal_resumes()
+//    {
+//        return $this->hasMany(Personal_resume::class);
+//    }
+
+    public function user_data()
+    {
+        return $this->hasOne(User_data::class);
+    }
+
+
 }

@@ -10,8 +10,8 @@ class Job_category extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function Job_ads(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function advertisements(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Job_ad::class);
+        return $this->hasMany(Advertisement::class);
     }
 }

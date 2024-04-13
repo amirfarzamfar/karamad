@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resumes', function (Blueprint $table) {
+        Schema::create('user_datas', function (Blueprint $table) {
             $table->id();
-//            $table->string('file');
+            $table->char('name');
+            $table->char('family');
             $table->enum('gender', ['male','female']);
             $table->enum('marital_status',['married ','single']);
-            $table->timestamp('year_of_birth');
+            $table->date('year_of_birth')->nullable();
             $table->enum('military_exemption',['Exempt','Not Exempt']);
             $table->string('email');
             $table->string('phone_number');
-            $table->string('province');
-            $table->string('city');
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
             $table->text('address');
-            $table->text('about_me');
-            $table->foreignId('jobCategory_id');
-            $table->foreign('jobCategory_id')->references('id')->on('job_categories')->onDelete('cascade');
+            $table->text('about_me')->nullable();
+            $table->enum('status',['accepted' , 'not_accepted'])->nullable();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

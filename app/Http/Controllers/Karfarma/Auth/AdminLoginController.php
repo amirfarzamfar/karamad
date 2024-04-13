@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Karfarma\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -10,23 +10,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
     public function __invoke(LoginRequest $request)
     {
 
-        $user = User::where('phone_number', $request->validated('input'))
+
+        $admin = User::where('phone_number', $request->validated('input'))
             ->orWhere('email', $request->validated('input'))
             ->first();
 
 
-        if (!$user || !Hash::check($request->validated('password'), $user->password)) {
+        if (!$admin || !Hash::check($request->validated('password'), $admin->password)) {
             throw ValidationException::withMessages([
                 'message' => 'Incorrect inputs.'
             ]);
         }
 
 
-        return  LoginResource::make($user);
+
+
+
+        return  LoginResource::make($admin);
     }
 }

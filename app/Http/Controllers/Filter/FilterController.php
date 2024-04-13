@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Filter;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fliter\FilterRequest;
-use App\Models\Job_ad;
+use App\Http\Resources\AdManagement\AdvertisementResource;
+use App\Models\Advertisement;
 use App\Models\Job_category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,11 +23,13 @@ class FilterController extends Controller
     public function newestJobAd()
     {
 
-        $newestAd = Job_ad::orderBy('created_at', 'desc')->paginate(10);
+
+        $newestAd = Advertisement::orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json([
             'message' => 'newestJobAd',
-            'newestJobAd' => $newestAd
+//            'newestJobAd' => $newestAd
+          AdvertisementResource::collection($newestAd)
         ]);
 
     }
@@ -37,21 +40,19 @@ class FilterController extends Controller
         // دریافت والیدیت شده فیلترها از درخواست
         $validatedData = $request->validate([
             'category' => 'nullable|string',
+            'title' => 'nullable|string',
             'salary' => 'nullable|numeric',
-            'experience' => 'nullable|numeric',
-            'province' => 'nullable|string',
-            'city' => 'nullable|string',
+            'city/province' => 'nullable|string',
             'type_of_cooperation' => 'nullable|string',
         ]);
 
         // Query Builder برای ساخت کوئری فیلتر شده
-        $query = QueryBuilder::for(Job_ad::class)
+        $query = QueryBuilder::for(Advertisement::class)
             ->allowedFilters([
                 'category' => AllowedFilter::partial('job_category_name'),
+                'title' => 'nullable|string',
                 'salary',
-                'experience',
-                'province',
-                'city',
+                'city/province',
                 'type_of_cooperation',
             ]);
 

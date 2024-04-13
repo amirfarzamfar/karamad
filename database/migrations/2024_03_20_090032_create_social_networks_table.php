@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('social_networks', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->foreignId('resume_id');
-            $table->foreign('resume_id')->references('id')->on('resumes')->onDelete('cascade');
+            $table->foreignId('user_data_id');
+            $table->foreign('user_data_id')->references('id')->on('user_datas')->onDelete('cascade');
+            $table->char('instagram_id');
+            $table->char('github_id');
+            $table->char('linkedin_id');
             $table->timestamps();
         });
     }

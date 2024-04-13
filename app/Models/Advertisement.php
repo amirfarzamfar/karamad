@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Job_ad extends Model
+class Advertisement extends Model
 {
     use HasFactory;
      protected $guarded = [];
@@ -19,4 +20,12 @@ class Job_ad extends Model
         return $this->belongsTo(Job_category::class);
     }
 
+    public function personal_resumes()
+    {
+        $this->hasMany(Personal_resume::class);
+    }
+    public function userDatas(): BelongsToMany
+    {
+        return $this->belongsToMany(User_data::class);
+    }
 }

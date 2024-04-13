@@ -22,7 +22,8 @@ class PasswordResetCheckRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'phone_number' => ['required','regex:#^[0][9]\d{9}$#'],
+            'password' => 'required'
         ];
     }
 }

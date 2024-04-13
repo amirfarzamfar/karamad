@@ -16,7 +16,7 @@ class LoginResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "token" => $this->createToken('api_token', expiresAt: now()->addMinute(30))->plainTextToken,
+            "token" => $this->createToken('api_token', expiresAt: now()->addMinute(900))->plainTextToken,
             "role" => $this->getRoleNames(),
             "user" => [
                 "id" => $this->id,
