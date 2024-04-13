@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Personal_resume extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = [
+        'user_data_id',
+        'name'
+    ];
 
-    public function advertisement()
+    public function user_data(): BelongsTo
     {
-        return $this->belongsTo(Advertisement::class,'resume_id');
+        return $this->belongsTo(User_data::class);
     }
 }

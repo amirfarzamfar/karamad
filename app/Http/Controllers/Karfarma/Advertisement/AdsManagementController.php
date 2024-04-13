@@ -24,8 +24,8 @@ class AdsManagementController extends Controller
         $user = $request->user();
 
 
-//        $organization = Organization::where('user_id', $user->id)->first();
-        $advertisements = Advertisement::where('user_id', $user->id)
+        $organization = Organization::where('user_id', $user->id)->first();
+        $advertisements = Advertisement::where('organization_id', $organization->id)
             ->latest()
             ->paginate(20);
 
@@ -45,8 +45,8 @@ class AdsManagementController extends Controller
     {
 
         $user = auth()->user();
-
-        $advertisements = Advertisement::where('user_id', $user->id)->first();
+        $organization = Organization::where('user_id', $user->id)->first();
+        $advertisements = Advertisement::where('organization_id', $organization->id)->first();
         $advertisements->update([
             'title'=>$request->title,
             'gender'=>$request->gender,

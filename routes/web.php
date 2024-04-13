@@ -19,12 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/auth" , function (){
+Route::get("/auth", function () {
     $user = \App\Models\User::whereEmail('amir@gmail.com')->first();
-    Auth::login($user,true);
+    Auth::login($user, true);
 });
 
-Route::get("/login",function (){
+Route::get("/login", function () {
     return Socialite::driver('google')->redirect();
 });
-Route::get("/google-login",[GoogleAuthControlller::class,'callbackGoogle']);
+Route::get("/google-login", [GoogleAuthControlller::class, 'callbackGoogle']);

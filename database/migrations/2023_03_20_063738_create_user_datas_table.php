@@ -15,20 +15,20 @@ return new class extends Migration
             $table->id();
             $table->char('name');
             $table->char('family');
-            $table->enum('gender', ['male','female']);
-            $table->enum('marital_status',['married ','single']);
+            $table->enum('gender', ['male', 'female']);
+            $table->enum('marital_status', ['married ', 'single']);
             $table->date('year_of_birth')->nullable();
-            $table->enum('military_exemption',['Exempt','Not Exempt']);
+            $table->enum('military_exemption', ['Exempt', 'Not Exempt']);
             $table->string('email');
             $table->string('phone_number');
             $table->string('province')->nullable();
             $table->string('city')->nullable();
             $table->text('address');
             $table->text('about_me')->nullable();
-            $table->enum('status',['accepted' , 'not_accepted'])->nullable();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('user_data');
     }
 };

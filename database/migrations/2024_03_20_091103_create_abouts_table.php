@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('support_phone_number');
             $table->string('support_email');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

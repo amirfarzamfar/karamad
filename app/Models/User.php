@@ -4,14 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +50,7 @@ class User extends Authenticatable
         return !is_null($this->phone_number_verified_at);
     }
 
-   public function  phone_number_verified_at()
+    public function  phone_number_verified_at()
     {
         return $this->forceFill([
             'phone_number_verified_at' => $this->freshTimestamp()
@@ -84,15 +88,13 @@ class User extends Authenticatable
         return $this->hasMany(Organization::class);
     }
 
-//    public function personal_resumes()
-//    {
-//        return $this->hasMany(Personal_resume::class);
-//    }
+    //    public function personal_resumes()
+    //    {
+    //        return $this->hasMany(Personal_resume::class);
+    //    }
 
     public function user_data()
     {
-        return $this->hasOne(User_data::class);
+        return $this->hasOne(user_data::class);
     }
-
-
 }

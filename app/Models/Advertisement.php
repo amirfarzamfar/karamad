@@ -4,27 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Advertisement extends Model
+class Advertisement extends Model implements HasMedia
 {
-    use HasFactory;
-     protected $guarded = [];
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    public function user()
+    protected $fillable = [
+        'organization_id',
+        'title',
+        'gender',
+        'type_of_cooperation',
+        'military_exemption',
+        'salary',
+        'city/province',
+        'degree_of_education',
+        'address',
+        'about',
+        'status'
+    ];
+
+    public function Organization(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Organization::class);
     }
+
     public function Job_category()
     {
         return $this->belongsTo(Job_category::class);
     }
 
-    public function personal_resumes()
+    public function Skills(): hasMany
     {
-        $this->hasMany(Personal_resume::class);
+        return $this->hasMany(Skill::class);
     }
-    public function userDatas(): BelongsToMany
+
+    public function userDatas(): belongsToMany
     {
         return $this->belongsToMany(User_data::class);
     }
