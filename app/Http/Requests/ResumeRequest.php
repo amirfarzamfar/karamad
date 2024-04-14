@@ -43,12 +43,12 @@ class ResumeRequest extends FormRequest
             'EducationalRecord.*.grade'=>'required|string',
             'EducationalRecord.*.field_of_study'=>'required|string',
             'EducationalRecord.*.university_name'=>'required|string',
+            /*'EducationalRecord.*.currently_studying'=>'accepted',*/
+            'EducationalRecord.*.entering_year'=>'required|date',
+            'EducationalRecord.*.graduation_year'=>'required|date',
             'instagram_id'=>'nullable|email',
             'github_id'=>'nullable|string',
             'linkedin_id'=>'nullable|string',
-            'EducationalRecord.*.entering_year'=>'required|date',
-            'EducationalRecord.*.graduation_year'=>'required|date',
-            /*'EducationalRecord.*.currently_studying'=>'accepted',*/
             'personalResume.*.name'=>'nullable|file|mimes:pdf',
         ];
     }

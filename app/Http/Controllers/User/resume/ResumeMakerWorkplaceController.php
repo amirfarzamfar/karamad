@@ -18,7 +18,7 @@ class ResumeMakerWorkplaceController extends Controller
     public function index()
     {
         try {
-            $id = 1;
+            $id = auth()->id();
 
             $User_data = User_data::where('user_id' , $id)->get();
 

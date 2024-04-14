@@ -64,7 +64,7 @@ class CreateResumeController extends Controller
     {
        $EducationalRecords = $request->EducationalRecord;
 
-       $user_data = User_data::where('user_id' , 1)->first();
+       $user_data = User_data::where('user_id' , auth()->id())->first();
 
        foreach ($EducationalRecords as $EducationalRecord)
        {
@@ -84,7 +84,7 @@ class CreateResumeController extends Controller
     {
         $skills = $request->skill;
 
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         foreach ($skills as $skill){
             Skill::create([
@@ -98,7 +98,7 @@ class CreateResumeController extends Controller
 
     public function createSocialNetwork($request): void //
     {
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         Social_network::create([
             'user_data_id'=>$user_data->id,
@@ -110,7 +110,7 @@ class CreateResumeController extends Controller
 
     public function createWorkExperience($request) //
     {
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         $WorkExperiences = $request->workexperince;
 
@@ -130,7 +130,7 @@ class CreateResumeController extends Controller
     {
         $personalResumes = $request->personalResume;
 
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         foreach ($personalResumes as $personalResume){
 
