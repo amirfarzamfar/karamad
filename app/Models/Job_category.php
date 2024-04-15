@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job_category extends Model
@@ -15,13 +16,18 @@ class Job_category extends Model
         'job_category_name'
     ];
 
-    public function advertisements(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function advertisements(): HasMany
     {
         return $this->hasMany(Advertisement::class);
     }
 
-    public function Organizations(): belongsToMany
+    public function Organizations(): HasMany
     {
-        return $this->belongsToMany(Organization::class);
+        return $this->hasMany(Organization::class);
+    }
+
+    public function Users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }
