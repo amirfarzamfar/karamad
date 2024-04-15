@@ -89,7 +89,7 @@ class CreateResumeController extends Controller
         foreach ($skills as $skill){
             Skill::create([
                 'model'=>'app/model/resume',
-                'user_data_id'=>$user_data->id,
+                'model_id'=>$user_data->id,
                 'skill_name'=>$skill['skill_name'],
                 'skill_percentage'=>$skill['skill_percentage']
         ]);

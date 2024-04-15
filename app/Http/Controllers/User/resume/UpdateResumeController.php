@@ -76,7 +76,7 @@ class UpdateResumeController extends Controller
         $skills = $request->skill;
 
         foreach ($skills as $skill){
-            Skill::where('user_data_id',$id)->update([
+            Skill::where('model' , 'app/model/resume')->where('model_id',$id)->update([
                 'skill_name'=>$skill['skill_name'],
                 'skill_percentage'=>$skill['skill_percentage']
             ]);

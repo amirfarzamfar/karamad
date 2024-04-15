@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class HasResume
+class ResumeUploadChecker
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class HasResume
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $id = auth()->id();
-        if (!User_data::where('user_id' , $id)->exists()){
-            return redirect()->route('user.Resume.workplace');
+        $user_data_id = $request->route('user_data_id');
+        $user_data = User_data::where('id' , $user_data_id)->first();
+        if($user_data->user_id == auth()->id()){
+            return $next($request);
+        }else{
+          return redirect()->back();
         }
-        return $next($request);
     }
 }

@@ -17,9 +17,8 @@ class SendOnce
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd(2);
         $advertisement_id = (int)$request->route('advertisement_id');
-        $user_id = 1;
+        $user_id = auth()->id();
         $user_data = User_data::where('user_id' , $user_id)->first();
         $user_data_id = $user_data->id;
         if(Advertisement_user_data::where('advertisement_id' , $advertisement_id)->where('user_data_id',$user_data_id)->exists()){

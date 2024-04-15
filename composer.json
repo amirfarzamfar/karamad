@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.2.4",
         "guzzlehttp/guzzle": "^7.2",
+        "hekmatinasser/verta": "^8.4",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.12",
