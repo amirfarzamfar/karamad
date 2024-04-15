@@ -17,7 +17,7 @@ class AdvertisementCreateController extends Controller
     public function create(CreateAdRequest $request)
     {
         try {
-            $id = 1;
+            $id = auth()->id();
             $organization = Organization::where('user_id' , $id)->first();
             $organization_id = $organization->id;
             self::createAdvertisement($request , $organization_id);
