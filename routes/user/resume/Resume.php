@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\User\resume\CreateResumeController;
-use App\Http\Controllers\User\resume\ResumeMakerWorkplaceController;
+use App\Http\Controllers\User\resume\ShowResumeController;
 use App\Http\Controllers\User\resume\SendResumeController;
 use App\Http\Controllers\User\resume\UpdateResumeController;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('resume')->group(function (){
-    Route::get('/workplace' , [ResumeMakerWorkplaceController::class , 'index'])->name('user.Resume.workplace');
+    Route::get('/workplace' , [ShowResumeController::class , 'index'])->name('user.Resume.workplace');
     Route::get('/show' , [CreateResumeController::class , 'index'])->name('user.Resume.show');
     Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create');
     Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->whereNumber('advertisement_id')->name('user.Resume.send')/*->middleware(['hasResume','sendOnce'])*/;

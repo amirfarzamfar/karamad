@@ -46,7 +46,7 @@ class ResumeRequest extends FormRequest
             /*'EducationalRecord.*.currently_studying'=>'accepted',*/
             'EducationalRecord.*.entering_year'=>'required|date',
             'EducationalRecord.*.graduation_year'=>'required|date',
-            'instagram_id'=>'nullable|email',
+            'instagram_id'=>'nullable|string',
             'github_id'=>'nullable|string',
             'linkedin_id'=>'nullable|string',
             'personalResume.*.name'=>'nullable|file|mimes:pdf',

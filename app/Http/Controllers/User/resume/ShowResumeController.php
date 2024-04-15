@@ -13,20 +13,27 @@ use App\Models\Work_experience;
 use Illuminate\Support\Facades\Storage;
 use function response;
 
-class ResumeMakerWorkplaceController extends Controller
+class ShowResumeController extends Controller
 {
-    public function index()
+    public function index(int $User_data_id = null)
     {
         try {
-            $id = auth()->id();
+            if ($User_data_id == null){
+                $id = auth()->id();
 
-            $User_data = User_data::where('user_id' , $id)->get();
+                $User_data = User_data::where('user_id' , $id)->get();
 
-            $User_data_id = $User_data[0]->id;
+                $User_data_id = $User_data[0]->id;
+            }else{
+                $User_data = User_data::where('id',$User_data_id)->get();
+            }
+            if ($User_data[0]->hasMedia()){
+                $image = $User_data[0]->getMedia();
 
-            $image = User_data::find($User_data_id)->getMedia();
-
-            $avatar_id = $image[0]->getUrl();
+                $avatar_id = $image[0]->getUrl();
+            }else{
+                $avatar_id = null ;
+            }
 
             if ($User_data_id !== null)
             {
@@ -76,7 +83,7 @@ class ResumeMakerWorkplaceController extends Controller
 
     public function FindSkill($id)
     {
-      return Skill::where('model','app/model/resume')->where('user_data_id' , $id)->get(['skill_name','skill_percentage']);
+      return Skill::where('model','app/model/resume')->where('model_id' , $id)->get(['skill_name','skill_percentage']);
     }
 
     //

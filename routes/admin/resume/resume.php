@@ -1,7 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\resume\SetResumeStatusController;
-use App\Http\Controllers\Admin\resume\ShowResumeController;
 use App\Http\Controllers\Admin\resume\ShowResumesController;
+use App\Http\Controllers\User\resume\ShowResumeController;
 use Illuminate\Support\Facades\Route;
 
 

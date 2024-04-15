@@ -27,7 +27,7 @@ class   CreateAdRequest extends FormRequest
             'type_of_cooperation'=>'required|string',
             'military_exemption'=>'required|string',
             'salary'=>'required|string',
-            'city/province'=>'required|string',
+            'cityProvince'=>'required|string',
             'degree_of_education'=>'required|string',
             'address'=>'required|string',
             'about'=>'nullable|string',
