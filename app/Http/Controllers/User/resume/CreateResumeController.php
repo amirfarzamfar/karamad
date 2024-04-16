@@ -134,21 +134,23 @@ class CreateResumeController extends Controller
 
         foreach ($personalResumes as $personalResume){
 
-            $file = $personalResume['file'];
+            $file = $personalResume['name'];
+            if ($file !== null){
+                $unique_name =time().$file->getClientOriginalName();
 
-            $unique_name =time().$file->getClientOriginalName();
+                $name = $file->getClientOriginalName();
 
-            $name = $file->getClientOriginalName();
+                $destination = storage_path('app/public/files/' . $unique_name);
 
-            $destination = storage_path('app/public/files/' . $unique_name);
+                move_uploaded_file($file, $destination);
 
-            move_uploaded_file($file, $destination);
+                Personal_resume::create([
+                    'user_data_id'=>$user_data->id,
+                    'name'=>$name,
+                    'unique_name'=>$unique_name
+                ]);
+            }
 
-            Personal_resume::create([
-                'user_data_id'=>$user_data->id,
-                'name'=>$name,
-                'unique_name'=>$unique_name
-            ]);
         }
     }
 }

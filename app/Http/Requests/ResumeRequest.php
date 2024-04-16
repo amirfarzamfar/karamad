@@ -25,10 +25,12 @@ class ResumeRequest extends FormRequest
         return [
             'name'=>'required|string',
             'family'=>'required|string',
+            'gender' => 'required|string',
+            'marital_status'=>'required|string',
             'year_of_birth'=>'required|date',
             'military_exemption'=>'required',
             'email'=>'required|email',
-            'phone_number'=>'required|regex:/^(\+98|0)?9\d{9}$/',
+            'phone_number'=>['required','regex:/^(\+98|0)?9\d{9}$/'],
             'image'=>'required|image|mimes:jpeg,png,jpg,gif',
             'city'=>'nullable|string',
             'address'=>'required|string',

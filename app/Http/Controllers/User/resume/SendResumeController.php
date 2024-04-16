@@ -18,6 +18,7 @@ class SendResumeController extends Controller
           $user_data = User_data::where('user_id' , auth()->id())->first();
           $advertisement = Advertisement::find($advertisement_id);
           $advertisement->userDatas()->attach($user_data->id , ['created_at' => now(), 'updated_at' => now()]);
+            return response()->json(['success']);
         }catch (\Throwable $throwable){
             return response()->json($throwable->getMessage());
         }
