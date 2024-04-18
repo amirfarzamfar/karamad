@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_category_id');
+            $table->foreign('job_category_id')->references('id')->on('job_categories')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('family')->nullable();
             $table->string('phone_number')->unique();

@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +67,7 @@ class Kernel extends HttpKernel
         'hasResume' => \App\Http\Middleware\HasResume::class,
         'checkAdminForAd' => \App\Http\Middleware\CheckAdminForAd::class,
         'checkAdminForResume' => \App\Http\Middleware\CheckAdminForResume::class,
+        'checkUserForUploadResume' => \App\Http\Middleware\ResumeUploadChecker::class,
+        'checkUserForDeleteResume' => \App\Http\Middleware\ResumeDeleteChecker::class,
     ];
 }

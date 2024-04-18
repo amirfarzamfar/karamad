@@ -19,10 +19,13 @@ class UserProfileController extends Controller
         if( $id !== null){
             $user = User::find($id)->first();
 
-            $image = User::find($id)->getMedia();
+            if ($user->hasMedi()){
+                $image = User::find($id)->getMedia();
 
-            $avatar_id = $image[0]->getUrl();
-
+                $avatar_id = $image[0]->getUrl();
+            }else{
+                $avatar_id = null;
+            }
             $user_data = array(
                 'user_name' => $user->name ,
                 'avatar_url' => $avatar_id

@@ -64,7 +64,7 @@ class CreateResumeController extends Controller
     {
        $EducationalRecords = $request->EducationalRecord;
 
-       $user_data = User_data::where('user_id' , 1)->first();
+       $user_data = User_data::where('user_id' , auth()->id())->first();
 
        foreach ($EducationalRecords as $EducationalRecord)
        {
@@ -84,12 +84,12 @@ class CreateResumeController extends Controller
     {
         $skills = $request->skill;
 
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         foreach ($skills as $skill){
             Skill::create([
                 'model'=>'app/model/resume',
-                'user_data_id'=>$user_data->id,
+                'model_id'=>$user_data->id,
                 'skill_name'=>$skill['skill_name'],
                 'skill_percentage'=>$skill['skill_percentage']
         ]);
@@ -98,7 +98,7 @@ class CreateResumeController extends Controller
 
     public function createSocialNetwork($request): void //
     {
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         Social_network::create([
             'user_data_id'=>$user_data->id,
@@ -110,7 +110,7 @@ class CreateResumeController extends Controller
 
     public function createWorkExperience($request) //
     {
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         $WorkExperiences = $request->workexperince;
 
@@ -130,25 +130,27 @@ class CreateResumeController extends Controller
     {
         $personalResumes = $request->personalResume;
 
-        $user_data = User_data::where('user_id' , 1)->first();
+        $user_data = User_data::where('user_id' , auth()->id())->first();
 
         foreach ($personalResumes as $personalResume){
 
-            $file = $personalResume['file'];
+            $file = $personalResume['name'];
+            if ($file !== null){
+                $unique_name =time().$file->getClientOriginalName();
 
-            $unique_name =time().$file->getClientOriginalName();
+                $name = $file->getClientOriginalName();
 
-            $name = $file->getClientOriginalName();
+                $destination = storage_path('app/public/files/' . $unique_name);
 
-            $destination = storage_path('app/public/files/' . $unique_name);
+                move_uploaded_file($file, $destination);
 
-            move_uploaded_file($file, $destination);
+                Personal_resume::create([
+                    'user_data_id'=>$user_data->id,
+                    'name'=>$name,
+                    'unique_name'=>$unique_name
+                ]);
+            }
 
-            Personal_resume::create([
-                'user_data_id'=>$user_data->id,
-                'name'=>$name,
-                'unique_name'=>$unique_name
-            ]);
         }
     }
 }

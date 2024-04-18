@@ -34,7 +34,7 @@ class Advertisement extends Model implements HasMedia
         return $this->belongsTo(Organization::class);
     }
 
-    public function Job_category()
+    public function Job_category(): BelongsTo
     {
         return $this->belongsTo(Job_category::class);
     }

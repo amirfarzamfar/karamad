@@ -48,6 +48,8 @@ require __DIR__ . '/user/advertisement/advertisement.php';
 require __DIR__ . '/admin/advertisement/advertisement.php';
 require __DIR__ . '/admin/resume/resume.php';
 
+//provinceCity
+require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 
 
 
@@ -65,5 +67,5 @@ Route::get('/download', function () {
 
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-    \App\Models\Advertisement::find(3)->addMediaFromRequest('image')->toMediaCollection();
+
 });

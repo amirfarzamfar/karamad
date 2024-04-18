@@ -25,10 +25,12 @@ class ResumeRequest extends FormRequest
         return [
             'name'=>'required|string',
             'family'=>'required|string',
+            'gender' => 'required|string',
+            'marital_status'=>'required|string',
             'year_of_birth'=>'required|date',
             'military_exemption'=>'required',
             'email'=>'required|email',
-            'phone_number'=>'required|regex:/^(\+98|0)?9\d{9}$/',
+            'phone_number'=>['required','regex:/^(\+98|0)?9\d{9}$/'],
             'image'=>'required|image|mimes:jpeg,png,jpg,gif',
             'city'=>'nullable|string',
             'address'=>'required|string',
@@ -43,12 +45,12 @@ class ResumeRequest extends FormRequest
             'EducationalRecord.*.grade'=>'required|string',
             'EducationalRecord.*.field_of_study'=>'required|string',
             'EducationalRecord.*.university_name'=>'required|string',
-            'instagram_id'=>'nullable|email',
-            'github_id'=>'nullable|string',
-            'linkedin_id'=>'nullable|string',
+            /*'EducationalRecord.*.currently_studying'=>'accepted',*/
             'EducationalRecord.*.entering_year'=>'required|date',
             'EducationalRecord.*.graduation_year'=>'required|date',
-            /*'EducationalRecord.*.currently_studying'=>'accepted',*/
+            'instagram_id'=>'nullable|string',
+            'github_id'=>'nullable|string',
+            'linkedin_id'=>'nullable|string',
             'personalResume.*.name'=>'nullable|file|mimes:pdf',
         ];
     }

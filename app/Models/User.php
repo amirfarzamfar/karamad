@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -96,5 +96,10 @@ class User extends Authenticatable implements HasMedia
     public function user_data()
     {
         return $this->hasOne(user_data::class);
+    }
+
+    public function Categories(): belongsTo
+    {
+        return $this->belongsTo(Job_category::class);
     }
 }

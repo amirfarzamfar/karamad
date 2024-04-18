@@ -13,16 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-
-        $user = Role::create(['name' => 'user']);
-        $jobSeeker = Role::create(['name' => 'jobSeeker']);
-        $employer = Role::create(['name' => 'employer']);
+       $this->call([
+           CategorySeeder::class
+       ]);
     }
 }
