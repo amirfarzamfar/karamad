@@ -20,6 +20,7 @@ class LoginController extends Controller
             ->first();
 
 
+
         if (!$user || !Hash::check($request->validated('password'), $user->password)) {
             throw ValidationException::withMessages([
                 'message' => 'Incorrect inputs.'

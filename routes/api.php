@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('resume', [\App\Http\Controllers\FileController::class, 'saveFile']);
 
-require __DIR__ . '/Auth/auth.php';
+require __DIR__ . '/Auth/Auth.php';
 require __DIR__ . '/JobAd/JobAd.php';
 require __DIR__ . '/Filter/Filter.php';
 

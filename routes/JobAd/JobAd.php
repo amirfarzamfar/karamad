@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/marked_ad',[ProfileSidebarController::class,'markedAd'])->middleware('auth:sanctum');
-Route::post('/profile_sidebar',[ProfileSidebarController::class,'sideBar']);
+Route::post('/profile_sidebar',[ProfileSidebarController::class,'sideBar'])->middleware('auth:sanctum');
 Route::post('/posted_resume',[ProfileSidebarController::class,'postedResume'])->middleware('auth:sanctum');
 Route::post('/all_ads',[AdsManagementController::class,'allAds'])->middleware('auth:sanctum');
 Route::post('/edit_ads',[AdsManagementController::class,'editAdd'])->middleware('auth:sanctum');

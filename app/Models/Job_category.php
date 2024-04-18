@@ -20,8 +20,14 @@ class Job_category extends Model
         return $this->hasMany(Advertisement::class);
     }
 
-    public function Organizations(): belongsToMany
+    public function Organizations()
     {
-        return $this->belongsToMany(Organization::class);
+        return $this->hasMany(Organization::class);
     }
+
+    public function Users()
+    {
+        return $this->hasMany(User::class);
+    }
+
 }

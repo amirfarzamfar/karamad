@@ -18,11 +18,13 @@ class ProfileSidebarController extends Controller
 
     public function sideBar(Request $request)
     {
+
         $markedAd = self::markedAd($request);
         $postedResume = self::postedResume();
         $logout = new LogoutController();
         $editUser = new EditUserController($request->user());
         $editUser->edit_user_profile($request->user());
+
 
         return[
             $markedAd,
@@ -48,12 +50,18 @@ class ProfileSidebarController extends Controller
 //        ]);
 
         $user_id =  auth()->id();
-        $ads_id = $request -> input('id');
+        $ads_id = $request->input('ads_id');
 
-        Marked_ad::create([
+        $markedAd =  Marked_ad::create([
             'user_id' => $user_id,
             'ads_id' => $ads_id
         ]);
+
+        return response()->json([
+            'markedAd' => $markedAd
+        ]);
+
+
 
     }
 
@@ -65,6 +73,9 @@ class ProfileSidebarController extends Controller
         $user_data = $user->user_data;
         $posted_resume = Advertisement_user_data::where('user_data_id',$user_data->id)->get();
 
+        return response()->json([
+            'postedResume'=> $posted_resume
+        ]);
 
     }
 

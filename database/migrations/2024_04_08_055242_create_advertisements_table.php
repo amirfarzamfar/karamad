@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organization_id');
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
+            $table->foreignId('job_category_id');
+            $table->foreign('job_category_id')->references('id')->on('job_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
             $table->enum('gender' , ['male','female'])->nullable();
             $table->enum('type_of_cooperation',['full_time' , 'part_time' , 'telecommuting' , 'internship','project']);

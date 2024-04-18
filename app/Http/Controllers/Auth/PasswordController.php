@@ -99,7 +99,7 @@ class PasswordController extends Controller
 
         if (Hash::check($request->validated('old_password'), $user->password)) {
             $user->update([
-                'password' => $request->validated('new_password')
+                'password' => Hash::make($request->validated('new_password'))
             ]);
 
             return \response()->json([

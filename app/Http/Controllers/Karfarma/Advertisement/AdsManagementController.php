@@ -20,11 +20,10 @@ class AdsManagementController extends Controller
 
     public function allAds(Request $request)
     {
-
         $user = $request->user();
 
-
         $organization = Organization::where('user_id', $user->id)->first();
+
         $advertisements = Advertisement::where('organization_id', $organization->id)
             ->latest()
             ->paginate(20);
@@ -47,6 +46,9 @@ class AdsManagementController extends Controller
         $user = auth()->user();
         $organization = Organization::where('user_id', $user->id)->first();
         $advertisements = Advertisement::where('organization_id', $organization->id)->first();
+
+
+
         $advertisements->update([
             'title'=>$request->title,
             'gender'=>$request->gender,
@@ -60,5 +62,8 @@ class AdsManagementController extends Controller
             'organization_id'=>$request->organization_id,
             'status'=>$request->status
         ]);
+       return response()->json([
+          'message' => 'آگهی آپدیت شد'
+       ]);
     }
 }
