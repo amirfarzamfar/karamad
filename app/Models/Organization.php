@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -27,9 +26,9 @@ class Organization extends Model implements HasMedia
         'number_of_staff'
     ];
 
-    public function Categories(): belongsToMany
+    public function Category(): belongsTo
     {
-        return $this->belongsToMany(Job_category::class);
+        return $this->belongsTo(Job_category::class);
     }
 
     public function User(): belongsTo
