@@ -22,7 +22,7 @@ class SendOnce
         $user_data = User_data::where('user_id' , $user_id)->first();
         $user_data_id = $user_data->id;
         if(Advertisement_user_data::where('advertisement_id' , $advertisement_id)->where('user_data_id',$user_data_id)->exists()){
-            return response()->json('you cant send moreThan one resume');
+            return response()->json('you cant send more than one resume');
         }else{
             return $next($request);
         }
