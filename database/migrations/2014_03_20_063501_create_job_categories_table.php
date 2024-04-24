@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
             $table->string('job_category_name')->nullable();
-            $table->string('fa_job_category_name')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

@@ -16,41 +16,9 @@ use function response;
 class ShowResumeController extends Controller
 {
     protected $resume;
-    public function index(int $User_data_id = null)
+    public function index($avatar_id , $User_data_id , $User_data)
     {
         try {
-            if ($User_data_id == null){
-                $id = auth()->id();
-                if (User_data::where('user_id' , $id)->exists()){
-                    $User_data = User_data::where('user_id' , $id)->get();
-
-                    $User_data_id = $User_data[0]->id;
-                    if ($User_data[0]->hasMedia()){
-                        $image = $User_data[0]->getMedia();
-
-                        $avatar_id = $image[0]->getUrl();
-                    }else{
-                        $avatar_id = null ;
-                    }
-                }else{
-                    $this->resume = 'no resume';
-                    return response()->json(['resume' => null]);
-                }
-            }else{
-                if (User_data::where('id',$User_data_id)->exists()){
-                    $User_data = User_data::where('id',$User_data_id)->get();
-                    if ($User_data[0]->hasMedia()){
-                        $image = $User_data[0]->getMedia();
-
-                        $avatar_id = $image[0]->getUrl();
-                    }else{
-                        $avatar_id = null ;
-                    }
-                }else{
-                    $this->resume = 'no resume';
-                    return response()->json(['resume' => null]);
-                }
-            }
 
             if ($this->resume !== 'no resume') {
                 $educational_record = self::FindEducationalRecord($User_data_id);
@@ -62,7 +30,6 @@ class ShowResumeController extends Controller
                 $social_network = self::FindSocialNetwork($User_data_id);
 
                 $personal_resume = self::FindPersonalResume($User_data_id);
-
                 return (new ResumeMakerWorkplaceCollection($User_data))->additional([
                     'avatar' => $avatar_id,
                     'educational_record' => $educational_record,
@@ -70,7 +37,9 @@ class ShowResumeController extends Controller
                     'skill' => $skill,
                     'social_network' => $social_network,
                     'personal_resume' => $personal_resume
-                ]);
+              ]);
+            }else{
+                 return response()->json(['resume' => null]);
             }
         }catch (\Throwable $th){
             return response()->json($th->getMessage());
@@ -79,6 +48,49 @@ class ShowResumeController extends Controller
 
     //
 
+    public function adminSeeResume(int $User_data_id)
+    {
+        if (User_data::where('id',$User_data_id)->exists()) {
+            $User_data = User_data::where('id', $User_data_id)->get();
+            if ($User_data[0]->hasMedia()) {
+                $image = $User_data[0]->getMedia();
+
+                $avatar_id = $image[0]->getUrl();
+                return self::index($avatar_id , $User_data_id , $User_data);
+            } else {
+                $avatar_id = null;
+                return self::index($avatar_id , $User_data_id , $User_data);
+            }
+        }else{
+            $this->resume = 'no resume';
+            return self::index(null , null , null);
+        }
+    }
+
+    //
+
+    public function userSeeResume()
+    {
+        $id = auth()->id();
+        if (User_data::where('user_id' , $id)->exists()){
+            $User_data = User_data::where('user_id' , $id)->get();
+
+            $User_data_id = $User_data[0]->id;
+            if ($User_data[0]->hasMedia()){
+                $image = $User_data[0]->getMedia();
+                $avatar_id = $image[0]->getUrl();
+                return self::index($avatar_id , $User_data_id , $User_data);
+            }else{
+                $avatar_id = null ;
+                return self::index($avatar_id , $User_data_id , $User_data);
+            }
+        }else{
+            $this->resume = 'no resume';
+            return self::index(null , null , null);
+        }
+    }
+
+    //
 
     public function FindEducationalRecord($id)
     {
@@ -128,3 +140,38 @@ class ShowResumeController extends Controller
       return $resume;
     }
 }
+
+
+
+/*if ($User_data_id == null){
+                $id = auth()->id();
+                if (User_data::where('user_id' , $id)->exists()){
+                    $User_data = User_data::with('city','province')->where('user_id' , $id)->get();
+
+                    $User_data_id = $User_data[0]->id;
+                    if ($User_data[0]->hasMedia()){
+                        $image = $User_data[0]->getMedia();
+
+                        $avatar_id = $image[0]->getUrl();
+                    }else{
+                        $avatar_id = null ;
+                    }
+                }else{
+                    $this->resume = 'no resume';
+                    return response()->json(['resume' => null]);
+                }
+            }else{
+                if (User_data::where('id',$User_data_id)->exists()){
+                    $User_data = User_data::with('city','province')->where('id',$User_data_id)->get();
+                    if ($User_data[0]->hasMedia()){
+                        $image = $User_data[0]->getMedia();
+
+                        $avatar_id = $image[0]->getUrl();
+                    }else{
+                        $avatar_id = null ;
+                    }
+                }else{
+                    $this->resume = 'no resume';
+                    return response()->json(['resume' => null]);
+                }
+            }*/

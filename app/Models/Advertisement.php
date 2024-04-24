@@ -15,18 +15,13 @@ class Advertisement extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = [
-        'organization_id',
-        'title',
-        'gender',
-        'type_of_cooperation',
-        'military_exemption',
-        'salary',
-        'city/province',
-        'degree_of_education',
-        'address',
-        'about',
-        'status'
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "jobCategory",
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 
     public function Organization(): BelongsTo
@@ -34,7 +29,7 @@ class Advertisement extends Model implements HasMedia
         return $this->belongsTo(Organization::class);
     }
 
-    public function Job_category(): BelongsTo
+    public function jobCategory(): BelongsTo
     {
         return $this->belongsTo(Job_category::class);
     }
@@ -48,4 +43,13 @@ class Advertisement extends Model implements HasMedia
     {
         return $this->belongsToMany(User_data::class);
     }
+    public function City(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function  Province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
 }

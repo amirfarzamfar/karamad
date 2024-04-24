@@ -10,8 +10,11 @@ class Karamad_benefit extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'title',
-        'description'
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 }

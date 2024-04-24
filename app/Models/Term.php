@@ -10,7 +10,5 @@ class Term extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $fillable = [
-        'description'
-    ];
+    protected $guarded = [];
 }

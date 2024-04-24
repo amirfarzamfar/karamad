@@ -31,8 +31,9 @@ class ResumeRequest extends FormRequest
             'military_exemption'=>'required',
             'email'=>'required|email',
             'phone_number'=>['required','regex:/^(\+98|0)?9\d{9}$/'],
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif',
-            'city'=>'nullable|string',
+            'image'=>['required','image','mimes:jpeg,png,jpg,gif'],
+            'city'=>'required|string',
+            'Province'=>'required|string',
             'address'=>'required|string',
             'about_me'=>'nullable|string',
             'workexperince.*.job_title'=>'required|string',
@@ -51,7 +52,7 @@ class ResumeRequest extends FormRequest
             'instagram_id'=>'nullable|string',
             'github_id'=>'nullable|string',
             'linkedin_id'=>'nullable|string',
-            'personalResume.*.name'=>'nullable|file|mimes:pdf',
+            'personalResume.*.name'=>['nullable','file','mimes:pdf'],
         ];
     }
 }

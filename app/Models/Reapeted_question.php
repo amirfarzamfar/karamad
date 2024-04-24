@@ -10,8 +10,11 @@ class Reapeted_question extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'question',
-        'answer'
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 }

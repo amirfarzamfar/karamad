@@ -98,7 +98,7 @@ class User extends Authenticatable implements HasMedia
         return $this->hasOne(user_data::class);
     }
 
-    public function Categories(): belongsTo
+    public function jobCategory(): BelongsTo
     {
         return $this->belongsTo(Job_category::class);
     }

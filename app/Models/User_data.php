@@ -15,21 +15,7 @@ class User_data extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'family',
-        'gender',
-        'marital_status',
-        'year_of_birth',
-        'military_exemption',
-        'email',
-        'phone_number',
-        'province',
-        'city',
-        'address',
-        'about_me',
-        'user_id'
-    ];
+    protected $guarded = [];
 
     public function user(): BelongsTo //
     {
@@ -64,5 +50,17 @@ class User_data extends Model implements HasMedia
     public function advertisements(): belongsToMany
     {
         return $this->belongsToMany(Advertisement::class);
+    }
+    public function Categories(): belongsTo
+    {
+        return $this->belongsTo(Job_category::class);
+    }
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function  province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
     }
 }

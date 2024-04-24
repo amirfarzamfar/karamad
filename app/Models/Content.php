@@ -12,8 +12,5 @@ class Content extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $fillable = [
-        'title',
-        'description'
-    ];
+    protected $guarded = [];
 }

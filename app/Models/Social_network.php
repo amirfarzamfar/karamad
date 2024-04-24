@@ -11,12 +11,7 @@ class Social_network extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'user_data_id',
-        'instagram_id',
-        'github_id',
-        'linkedin_id'
-    ];
+    protected $guarded = [];
 
     public function user_data(): BelongsTo
     {

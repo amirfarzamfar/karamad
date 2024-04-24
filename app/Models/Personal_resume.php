@@ -11,10 +11,7 @@ class Personal_resume extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'user_data_id',
-        'name'
-    ];
+    protected $guarded = [];
 
     public function user_data(): BelongsTo
     {

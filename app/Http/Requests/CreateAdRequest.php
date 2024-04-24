@@ -27,12 +27,15 @@ class   CreateAdRequest extends FormRequest
             'type_of_cooperation'=>'required|string',
             'military_exemption'=>'required|string',
             'salary'=>'required|string',
-            'cityProvince'=>'required|string',
+            'city'=>'required|string',
+            'Province'=>'required|string',
             'degree_of_education'=>'required|string',
             'address'=>'required|string',
             'about'=>'nullable|string',
             'skill.*.skill_name'=>'required|string',
             'skill.*.skill_percentage'=>'required|integer',
+            'Advantages'=>'required|string',
+            'job_category_id'=>'required|integer'
         ];
     }
 }

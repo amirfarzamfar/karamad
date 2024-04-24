@@ -11,12 +11,7 @@ class Skill extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'model',
-        'model_id',
-        'skill_name',
-        'skill_percentage'
-    ];
+    protected $guarded = [];
 
     public function user_data(): BelongsTo
     {

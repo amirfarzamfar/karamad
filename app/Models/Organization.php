@@ -14,19 +14,11 @@ class Organization extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = [
-        'user_id',
-        'organizations_name',
-        'organizations_phone_number',
-        'organizations_email',
-        'organizations_web_address',
-        'organizations_about',
-        'city/province',
-        'organizations_address',
-        'number_of_staff'
-    ];
+    protected $guarded = [];
 
-    public function Category(): belongsTo
+    protected $hidden = ['jobCategory'];
+
+    public function jobCategory(): belongsTo
     {
         return $this->belongsTo(Job_category::class);
     }
@@ -39,5 +31,13 @@ class Organization extends Model implements HasMedia
     public function Advertisements(): hasMany
     {
         return $this->hasMany(Advertisement::class);
+    }
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+    public function  province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
     }
 }
