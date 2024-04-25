@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
             'national_id'=>1111111,
             'password'=>Hash::make(1111),
             'password_confirmation'=>Hash::make(1111),
+
         ]);
+
         User::create([
             'name'=>'کارفرما 1',
             'job_category_id'=> 1 ,
@@ -33,7 +35,7 @@ class UserSeeder extends Seeder
             'national_id'=>1111111,
             'password'=>Hash::make(1111),
             'password_confirmation'=>Hash::make(1111),
-        ]);
+        ])->assignRole('admin');
         User::create([
             'name'=>'کارفرما 2',
             'family'=>'کارفرما زاده',
@@ -43,6 +45,6 @@ class UserSeeder extends Seeder
             'national_id'=>1111111,
             'password'=>Hash::make(1111),
             'password_confirmation'=>Hash::make(1111),
-        ]);
+        ])->assignRole('admin');
     }
 }

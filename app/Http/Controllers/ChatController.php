@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ticket\ChatResource;
 use App\Models\Ticket\Chat;
-
+use Illuminate\Http\Request;
 
 
 class ChatController extends Controller
@@ -17,15 +17,21 @@ class ChatController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
+        $request->validate([
+            'subject' => 'required|string',
+        ]);
+
+
         if ((bool)auth()->user()->chat) {
             return response()->json([
                 'chat_id' => auth()->user()->chat->id
             ]);
         } else {
             $chat = Chat::create([
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                 'subject' => $request->input('subject')
             ]);
             return response()->json([
                 'chat_id' => $chat->id

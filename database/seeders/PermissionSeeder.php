@@ -12,20 +12,16 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // user
-        Permission::create(['name' => 'user.see']);
-        Permission::create(['name' => 'user.list']);
-        Permission::create(['name' => 'user.store']);
-        Permission::create(['name' => 'user.destroy']);
-        Permission::create(['name' => 'user.update']);
-        Permission::create(['name' => 'avatar.store']);
-        Permission::create(['name' => 'avatar.destroy']);
-        Permission::create(['name' => 'user.comment.store']);
-        Permission::create(['name' => 'user.comment.see']);
-        Permission::create(['name' => 'user.comment.destroy']);
-        Permission::create(['name' => 'user.comment.update']);
+        // chat
+        Permission::create(['name' => 'chat.store']);
+        Permission::create(['name' => 'chat.see']);
+        Permission::create(['name' => 'chat.all']);
+        Permission::create(['name' => 'chat.destroy']);
 
-        // filter
-        Permission::create(['name' => 'able_to_filter']);
+        // message
+        Permission::create(['name' => 'message.store']);
+        Permission::create(['name' => 'message.destroy']);
+        Permission::create(['name' => 'message.update']);
+        Permission::create(['name' => 'message.mark_as_seen']);
     }
 }
