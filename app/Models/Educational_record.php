@@ -11,15 +11,8 @@ class Educational_record extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'user_data_id',
-        'grade',
-        'field_of_study',
-        'university_name',
-        'entering_year',
-        'graduation_year',
-        'currently_studying'
-    ];
+    protected $guarded = [];
+
     public function user_data(): BelongsTo
     {
         return $this->belongsTo(User_data::class);

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('resume')->group(function (){
-    Route::get('/workplace' , [ShowResumeController::class , 'index'])->name('user.Resume.workplace');
+    Route::get('/workplace' , [ShowResumeController::class , 'userSeeResume'])->name('user.Resume.workplace');
     Route::get('/show' , [CreateResumeController::class , 'index'])->name('user.Resume.show');
     Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create');
     Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->whereNumber('advertisement_id')->name('user.Resume.send')/*->middleware(['hasResume','sendOnce'])*/;

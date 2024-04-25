@@ -12,8 +12,11 @@ class Karamad_tip extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $fillable = [
-        'title',
-        'description'
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 }

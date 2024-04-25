@@ -25,7 +25,7 @@ class CheckAdminForResume
         if (Advertisement_user_data::where('advertisement_id' , $advertisement->id)->where('user_data_id',$user_data_id)->exists()){
             return $next($request);
         }
-        return redirect()->route();
+        return redirect()->back();
     }
 }
 

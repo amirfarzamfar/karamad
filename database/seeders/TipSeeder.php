@@ -12,6 +12,6 @@ class TipSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+
     }
 }

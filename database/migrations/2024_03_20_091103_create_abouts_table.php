@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->string('support_phone_number');
-            $table->string('support_email');
+            $table->string('support_phone_number')->nullable();
+            $table->string('support_email')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

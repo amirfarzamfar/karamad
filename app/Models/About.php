@@ -10,8 +10,11 @@ class About extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'support_phone_number',
-        'support_email',
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 }

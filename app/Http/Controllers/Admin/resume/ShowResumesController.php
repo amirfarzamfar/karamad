@@ -16,7 +16,8 @@ class ShowResumesController extends Controller
         try {
             $user_data_ids = Advertisement_user_data::where('advertisement_id',$advertisement_id)->pluck('user_data_id')->toArray();
             $user_id = User_data::whereIn('id', $user_data_ids)->pluck('user_id')->toArray();
-            $users = User::whereIn('id' , $user_id)->get(['id','name' , 'family']);
+            $usersQuery = User::whereIn('id' , $user_id)->select('id', 'name', 'family' , 'created_at');
+            $users = $usersQuery->paginate(9);
             foreach ($users as $user) {
                 $resume = User_data::where('user_id' , $user->id)->first();
                 $pivot = Advertisement_user_data::where('user_data_id' , $resume->id)->where('advertisement_id' , $advertisement_id)->first();

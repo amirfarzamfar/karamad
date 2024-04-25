@@ -53,7 +53,8 @@ require __DIR__ . '/admin/resume/resume.php';
 //provinceCity
 require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 
-
+//categories
+require __DIR__ . '/Category/Category.php';
 
 
 Route::get('/download', function () {
@@ -69,5 +70,6 @@ Route::get('/download', function () {
 
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-
+  $x = base64_encode('ظاها');
+    dd(base64_decode($x));
 });

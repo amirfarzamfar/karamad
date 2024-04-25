@@ -18,8 +18,7 @@ class CategorySeeder extends Seeder
         foreach ($categories as $category)
         {
             Job_category::create([
-                'job_category_name'=> TranslateTextHelper::translate($category),
-                'fa_job_category_name' =>$category
+                'job_category_name'=> base64_encode($category),
             ]);
         }
 

@@ -12,9 +12,5 @@ class Advertisement_user_data extends Model
 
     protected $table = 'advertisement_user_data';
 
-    protected $fillable = [
-        'advertisement_id',
-        'resume_id',
-        'status'
-    ];
+    protected $guarded = [];
 }

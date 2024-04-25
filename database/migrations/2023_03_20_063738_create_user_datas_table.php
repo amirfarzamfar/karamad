@@ -21,8 +21,8 @@ return new class extends Migration
             $table->enum('military_exemption', ['Exempt', 'Not Exempt']);
             $table->string('email');
             $table->string('phone_number');
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
+            $table->integer('province_id')->nullable();
+            $table->integer('city_id')->nullable();
             $table->text('address');
             $table->text('about_me')->nullable();
             $table->foreignId('user_id');

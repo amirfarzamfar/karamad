@@ -13,12 +13,15 @@ class Job_category extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'job_category_name',
-        'fa_job_category_name'
+    protected $guarded = [];
+
+    protected  $hidden = [
+        "job_category_name",
+        "deleted_at",
+        "updated_at",
+        "created_at"
     ];
 
-    protected $translatable = ['job_category_name'];
 
     public function advertisements(): HasMany
     {
@@ -34,4 +37,8 @@ class Job_category extends Model
     {
         return $this->hasMany(User::class);
     }
+
 }
+
+
+

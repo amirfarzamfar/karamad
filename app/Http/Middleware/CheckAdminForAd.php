@@ -22,6 +22,6 @@ class CheckAdminForAd
        if (Organization::where('id',$organization_id)->where('user_id' , auth()->id())->exists()){
            return $next($request);
        }
-        return redirect()->route();
+        return redirect()->back();
     }
 }

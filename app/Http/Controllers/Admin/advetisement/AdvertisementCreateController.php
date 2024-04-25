@@ -34,13 +34,16 @@ class AdvertisementCreateController extends Controller
             'organization_id'=> $id,
             'title'=>$request->title,
             'gender'=>$request->gender,
+            'job_category_id'=>$request->job_category_id,
             'type_of_cooperation'=>$request->type_of_cooperation,
             'military_exemption'=>$request->military_exemption,
             'salary'=>$request->salary,
-            'city/province'=>$request->cityProvince,
+            'city_id'=>$request->city,
+            'Province_id'=>$request->Province,
             'degree_of_education'=>$request->degree_of_education,
             'address'=>$request->address,
             'about'=>$request->about,
+            'Advantages'=>$request->Advantages,
         ]);
        $this->advertisement_id = $advertisement->id;
     }

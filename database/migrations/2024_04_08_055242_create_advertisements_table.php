@@ -22,10 +22,12 @@ return new class extends Migration
             $table->enum('type_of_cooperation', ['full_time', 'part_time', 'telecommuting', 'internship', 'project']);
             $table->enum('military_exemption', ['Exempt', 'Not Exempt']);
             $table->decimal('salary', 10, 2)->nullable();
-            $table->string('city/province');
+            $table->integer('province_id')->nullable();
+            $table->integer('city_id')->nullable();
             $table->string('degree_of_education');
             $table->text('address');
             $table->text('about');
+            $table->text('Advantages');
             $table->enum('status', ['active', 'closed', 'awaiting_review'])->default('active');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
