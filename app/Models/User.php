@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Ticket\Chat;
+use App\Models\Ticket\Ticket;
+use App\Models\Ticket\TicketAdmin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -102,4 +105,17 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsTo(Job_category::class);
     }
+
+
+    public function ticketAdmin()
+    {
+        return $this->hasOne(TicketAdmin::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class );
+    }
+
+
 }
