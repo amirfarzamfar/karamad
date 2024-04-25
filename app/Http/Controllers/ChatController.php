@@ -40,11 +40,8 @@ class ChatController extends Controller
         return ChatResource::make($chat);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    #[Endpoint("Delete a chat", "From here you can delete a chat.")]
-    #[UrlParam(name: "chat_id", type: "int", description: "The id of existing chat", required: true, example: 5)]
+
+
     public function destroy(Chat $chat)
     {
         $chat->delete();

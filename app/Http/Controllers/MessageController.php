@@ -19,6 +19,7 @@ class MessageController extends Controller
 
     public function store(StoreMessageRequest $request)
     {
+       dd(1);
         $admin = Auth::user()->hasRole('admin');
         if ($admin) {
             $chat = new Chat();
