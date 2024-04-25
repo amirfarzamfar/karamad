@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -16,5 +17,9 @@ class RoleSeeder extends Seeder
         $admin = Role::create(['name' => 'admin']);
         $superAdmin = Role::create(['name' => 'superAdmin']);
 
+        $superAdmin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo(Permission::all());
+
+        $user->givePermissionTo(['chat.store', 'chat.see','message.store']);
     }
 }

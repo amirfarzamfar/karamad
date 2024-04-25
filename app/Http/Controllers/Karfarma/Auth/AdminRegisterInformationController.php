@@ -76,13 +76,15 @@ class AdminRegisterInformationController extends Controller
 
                 Organization::create([
                     'user_id' => $this->user_id,
-                    'organization_name'=>$request->input('organization_name'),
-                    'organization_phone_number'=>$request->input('organization_phone_number'),
-                    'organization_email'=>$request->input('organization_email'),
-                    'organization_about'=>$request->input('organization_about'),
-                    'city/province'=>$request->input('city/province'),
-                    'organization_address'=>$request->input('organization_web_address'),
-                    'organization_web_address'=>$request->input('organization_address'),
+                    'job_category_id'=> $request->input('job_category_id'),
+                    'organizations_name'=>$request->input('organizations_name'),
+                    'organizations_phone_number'=>$request->input('organizations_phone_number'),
+                    'organizations_email'=>$request->input('organizations_email'),
+                    'organizations_about'=>$request->input('organizations_about'),
+                    'province_id'=>$request->input('province_id'),
+                    'city_id'=>$request->input('city_id'),
+                    'organizations_address'=>$request->input('organizations_address'),
+                    'organizations_web_address'=>$request->input('organizations_web_address'),
                     'number_of_staff'=>$request->input('number_of_staff')
                 ]);
             }

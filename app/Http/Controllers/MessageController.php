@@ -19,11 +19,12 @@ class MessageController extends Controller
 
     public function store(StoreMessageRequest $request)
     {
-       dd(1);
+
         $admin = Auth::user()->hasRole('admin');
         if ($admin) {
-            $chat = new Chat();
-            $chat->admin_id = $admin->id;
+            $admin_id = Auth::user()->id;
+            $chat = Chat::where('id',$request->input('chat_id'))->first();
+            $chat->update(['admin_id'=>$admin_id]);
             $chat->save();
         }
 
