@@ -8,6 +8,7 @@ use App\Models\About;
 use App\Models\Advertisement;
 use App\Models\Karamad_benefit;
 use App\Models\Karamad_tip;
+use App\Models\Organization;
 use App\Models\Reapeted_question;
 use App\Models\User;
 use function response;
@@ -43,15 +44,16 @@ class WorkplaceController extends Controller
     //
     public function Advertisements()
     {
-        $recentRecords = Advertisement::with(['jobCategory', 'City', 'Province'])
+        $recentRecords = Advertisement::with(['jobCategory', 'Organization'])
             ->latest()
             ->take(6)
             ->get();
 
         foreach ($recentRecords as $recentRecord){
            $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
-           if($recentRecord->hasMedia()){
-             $image = $recentRecord->getMedia();
+           $Organization = Organization::find($recentRecord->Organization->id);
+           if($Organization->hasMedia()){
+             $image = $Organization->getMedia();
              $Url = $image[0]->getUrl();
              $recentRecord->setAttribute('avatar_url', $Url);
            }

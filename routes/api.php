@@ -49,7 +49,7 @@ require __DIR__ . '/user/advertisement/advertisement.php';
 //admin
 require __DIR__ . '/admin/advertisement/advertisement.php';
 require __DIR__ . '/admin/resume/resume.php';
-
+require __DIR__ . '/admin/Organization/Organization.php';
 //provinceCity
 require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 

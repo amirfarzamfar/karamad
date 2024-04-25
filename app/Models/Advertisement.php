@@ -18,6 +18,7 @@ class Advertisement extends Model implements HasMedia
     protected $guarded = [];
 
     protected  $hidden = [
+        "Organization",
         "jobCategory",
         "deleted_at",
         "updated_at",
