@@ -14,12 +14,12 @@ class UserProfileController extends Controller
 {
     public function index(): UserProfileResource|JsonResponse
     {
-        $id = auth()->id();
+        $id = 1;
 
         if( $id !== null){
             $user = User::find($id)->first();
 
-            if ($user->hasMedi()){
+            if ($user->hasMedia()){
                 $image = User::find($id)->getMedia();
 
                 $avatar_id = $image[0]->getUrl();
@@ -28,6 +28,7 @@ class UserProfileController extends Controller
             }
             $user_data = array(
                 'user_name' => $user->name ,
+                'user_family'=> $user->family,
                 'avatar_url' => $avatar_id
             );
 

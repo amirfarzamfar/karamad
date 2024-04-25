@@ -55,6 +55,26 @@ class ShowAdController extends Controller
     {
         $organization = Organization::with(['jobCategory', 'City', 'Province'])->where('id',$id)->get();
         $organization[0]->setAttribute('decoded_category' , base64_decode($organization[0]->jobCategory->job_category_name));
+        if ($organization[0]->hasMedia('logo')){
+            $image = $organization[0]->getMedia('logo');
+            $Url = $image[0]->getUrl();
+            $organization[0]->setAttribute('logo_url', $Url);
+        }
+        if($organization[0]->hasMedia('hero')){
+            $image = $organization[0]->getMedia('hero');
+            $Url = $image[0]->getUrl();
+            $organization[0]->setAttribute('hero_url', $Url);
+        }
+        if ($organization[0]->hasMedia('image_1')) {
+            $image = $organization[0]->getMedia('image_1');
+            $Url = $image[0]->getUrl();
+            $organization[0]->setAttribute('image_1_url', $Url);
+        }
+        if($organization[0]->hasMedia('image_2')){
+            $image = $organization[0]->getMedia('image_2');
+            $Url = $image[0]->getUrl();
+            $organization[0]->setAttribute('image_2_url', $Url);
+        }
        return $organization[0];
     }
 
@@ -63,13 +83,6 @@ class ShowAdController extends Controller
        $advertisements = Advertisement::with(['jobCategory', 'City', 'Province'])->where('organization_id' , $id)->whereNot('id' , $advertisementId)->get();
         foreach ($advertisements as $advertisement) {
             $advertisement->setAttribute('decoded_category' , base64_decode($advertisement->jobCategory->job_category_name));
-            if($advertisement->hasMedia()){
-                $image = $advertisement->getMedia();
-                $Url = $image[0]->getUrl();
-                $advertisement->setAttribute('avatar_url', $Url);
-            }else{
-                $advertisement->setAttribute('avatar_url', null);
-            }
         }
         return $advertisements;
     }

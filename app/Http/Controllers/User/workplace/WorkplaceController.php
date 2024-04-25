@@ -52,8 +52,8 @@ class WorkplaceController extends Controller
         foreach ($recentRecords as $recentRecord){
            $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
            $Organization = Organization::find($recentRecord->Organization->id);
-           if($Organization->hasMedia()){
-             $image = $Organization->getMedia();
+           if($Organization->hasMedia('logo')){
+             $image = $Organization->getMedia('logo');
              $Url = $image[0]->getUrl();
              $recentRecord->setAttribute('avatar_url', $Url);
            }
@@ -70,10 +70,10 @@ class WorkplaceController extends Controller
 
         foreach ($karamad_benefits as $karamad_benefit){
             if ($karamad_benefit->title == 'کارفرما'){
-                /*$superAdminCount = User::with('roles')->get()->filter(
-                    fn ($user) => $user->roles->where('name', 'Super Admin')->toArray()
-                )->count();*/
-                $karamad_benefit->setAttribute('Karfarmas' , 'کارفرما'. User::count('id'));
+                $superAdminCount = User::with('roles')->get()->filter(
+                    fn ($user) => $user->roles->where('name', 'admin')->toArray()
+                )->count();
+                $karamad_benefit->setAttribute('Karfarmas' , 'کارفرما'. $superAdminCount);
             }
         }
         return $karamad_benefits;
