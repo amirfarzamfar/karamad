@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'password'=>Hash::make(1111),
             'password_confirmation'=>Hash::make(1111),
 
-        ])->assignRole('user');
+        ]);
 
         User::create([
             'name'=>'کارفرما 1',
