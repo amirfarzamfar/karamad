@@ -44,7 +44,7 @@ class WorkplaceController extends Controller
     //
     public function Advertisements()
     {
-        $recentRecords = Advertisement::with(['jobCategory', 'Organization'])
+        $recentRecords = Advertisement::with(['jobCategory', 'Organization' , 'City', 'Province'])
             ->latest()
             ->take(6)
             ->get();

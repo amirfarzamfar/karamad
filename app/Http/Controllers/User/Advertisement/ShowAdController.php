@@ -35,14 +35,7 @@ class ShowAdController extends Controller
     public function showAd($id)
     {
         $advertisements = Advertisement::with(['jobCategory', 'City', 'Province'])->where('id',$id)->get();
-      $advertisements[0]->setAttribute('decoded_category' , base64_decode($advertisements[0]->jobCategory->job_category_name));
-        if($advertisements[0]->hasMedia()){
-            $image = $advertisements[0]->getMedia();
-            $Url = $image[0]->getUrl();
-            $advertisements[0]->setAttribute('avatar_url', $Url);
-        }else{
-            $advertisements[0]->setAttribute('avatar_url', null);
-        }
+        $advertisements[0]->setAttribute('decoded_category' , base64_decode($advertisements[0]->jobCategory->job_category_name));
         return $advertisements;
     }
 

@@ -11,7 +11,7 @@ class UploadImageController extends Controller
     protected $organization;
     public function __construct()
     {
-        $user_id=3;
+        $user_id=auth()->id();
         $this->organization = Organization::where('user_id' , $user_id)->first();
     }
     public function uploadLogo(Request $request): \Illuminate\Http\JsonResponse

@@ -51,7 +51,7 @@ class ShowResumeController extends Controller
     public function adminSeeResume(int $User_data_id)
     {
         if (User_data::where('id',$User_data_id)->exists()) {
-            $User_data = User_data::where('id', $User_data_id)->get();
+            $User_data = User_data::with('City', 'Province')->where('id', $User_data_id)->get();
             if ($User_data[0]->hasMedia()) {
                 $image = $User_data[0]->getMedia();
 
@@ -73,7 +73,7 @@ class ShowResumeController extends Controller
     {
         $id = auth()->id();
         if (User_data::where('user_id' , $id)->exists()){
-            $User_data = User_data::where('user_id' , $id)->get();
+            $User_data = User_data::with('City', 'Province')->where('user_id' , $id)->get();
 
             $User_data_id = $User_data[0]->id;
             if ($User_data[0]->hasMedia()){

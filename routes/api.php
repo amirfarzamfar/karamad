@@ -57,18 +57,6 @@ require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 require __DIR__ . '/Category/Category.php';
 
 
-Route::get('/download', function () {
-    try {
-        $file = 'files/1712046205scurm.pdf';
-        $filePath = \Illuminate\Support\Facades\Storage::path($file);
-
-        return response()->download($filePath);
-    } catch (\Throwable $th) {
-        return response()->json($th->getMessage());
-    }
-})->name('file.download');
-
-
 Route::post('/test', function (\Illuminate\Http\Request $request) {
   $x = base64_encode('ظاها');
     dd(base64_decode($x));

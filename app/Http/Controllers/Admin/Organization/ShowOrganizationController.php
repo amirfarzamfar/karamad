@@ -12,7 +12,7 @@ class ShowOrganizationController extends Controller
     {
         try {
             $user_id = auth()->id();
-            $Organization = Organization::with( 'jobCategory')->where('user_id' , $user_id)->first();
+            $Organization = Organization::with( 'jobCategory' ,'city' , 'province')->where('user_id' , $user_id)->first();
             $Organization->setAttribute('decoded_category' , base64_decode($Organization->jobCategory->job_category_name));
             if ($Organization->hasMedia('logo')){
                 $mediaItems =  $Organization->getMedia('logo');
