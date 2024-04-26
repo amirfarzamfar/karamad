@@ -90,6 +90,10 @@ class UploadResumeController extends Controller
     {
         try {
             $user_data = User_data::find($user_data_id);
+            if ($user_data->hasMedia()){
+                $mediaItems = $user_data->getMedia();
+                $mediaItems[0]->delete();
+            }
             $user_data->addMediaFromRequest('image')->toMediaCollection();
             return response()->json('success');
         }catch (\Throwable $th)
