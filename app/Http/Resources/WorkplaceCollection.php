@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class WorkplaceCollection extends ResourceCollection
 {
-    public static $wrap = 'advertisement';
     /**
      * Transform the resource collection into an array.
      *

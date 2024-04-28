@@ -61,3 +61,4 @@ Route::post('/test', function (\Illuminate\Http\Request $request) {
   $x = base64_encode('ظاها');
     dd(base64_decode($x));
 });
+
