@@ -38,17 +38,6 @@ class ProfileSidebarController extends Controller
     {
 
 
-//        $ids = $request->input('id');
-//        $selectedRecords = Organization::whereIn('id', $ids)->get();
-//        $user = auth()->user();
-//
-//        $user->organization()->advertisements()->saveMany($selectedRecords);
-//
-//        return response()->json([
-//            'message' => 'marked job',
-//            'makrked job' => $user
-//        ]);
-
         $user_id =  auth()->id();
         $ads_id = $request->input('ads_id');
 
@@ -68,9 +57,9 @@ class ProfileSidebarController extends Controller
 
     public function postedResume()
     {
-
         $user = auth()->user();
         $user_data = $user->user_data;
+
         $posted_resume = Advertisement_user_data::where('user_data_id',$user_data->id)->get();
 
         return response()->json([

@@ -30,7 +30,7 @@ class ResumeSeeder extends Seeder
             'military_exemption'=>'Not Exempt',
             'email'=>'rastegar@gmail.com',
             'phone_number'=>'09192525014',
-            'address'=>'یجایی تو تهارن',
+            'address'=>' تهران',
         ]);
         Educational_record::create([
             'user_data_id'=>$user_data->id,

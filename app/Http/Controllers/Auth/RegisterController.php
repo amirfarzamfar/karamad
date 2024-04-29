@@ -41,6 +41,7 @@ class RegisterController extends Controller
                 'message' => 'User already registered.'
             ], 422);
         }
+
     }
     }
 

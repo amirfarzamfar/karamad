@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
 //            'name'=>
             'password' => ['required', 'string','confirmed'],
             'password_confirmation' => ['required', 'string',],
-            'organization_phone_number'
+
         ];
     }
 }

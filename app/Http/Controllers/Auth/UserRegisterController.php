@@ -22,7 +22,6 @@ class UserRegisterController extends Controller
                     'name' => $request->validated('name'),
                     'family' => $request->validated('family'),
                     'email' => $request->validated('email'),
-                    'national_id' => $request->validated('national_id'),
                     'password' => Hash::make($request->validated('password')),
                     'password_confirmation' => Hash::make($request->validated('password_confirmation')),
 

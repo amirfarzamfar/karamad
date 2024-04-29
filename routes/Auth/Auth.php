@@ -31,6 +31,7 @@ Route::post('/new-password', [PasswordController::class, 'new_password'])->middl
 
 
 //karfarma
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::post('/register', RegisterAdminController::class)->name('user.register');

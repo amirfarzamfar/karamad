@@ -93,16 +93,27 @@ class FilterController extends Controller
 
     public function SearchJobAd(Request $request)
     {
-        $job_category_name = $request->input('job_category_name');
-        $advertisements = Advertisement::whereHas('Job_category', function ($query) use ($job_category_name) {
-            $query->where('job_category_name',$job_category_name);
 
+        $job_category_id = $request->input('job_category_id');
+        $city_id = $request->input('city_id');
+        $province_id = $request->input('province_id');
+        $advertisements = Advertisement::when($job_category_id, function ($query) use ($job_category_id) {
+            $query->whereHas('jobCategory', function ($query) use ($job_category_id) {
+                $query->where('job_category_id', $job_category_id);
+            });
         })
-            ->when($request->input('title') , function ($query) use ($request){
-                $query->where('title',$request->input('title'));
+            ->when($city_id, function ($query) use ($city_id) {
+                $query->whereHas('City', function ($query) use ($city_id) {
+                    $query->where('city_id', $city_id);
+                });
             })
-            ->when($request->input('city/province') , function ($query) use ($request){
-                $query->where('city/province',$request->input('city/province'));
+            ->when($province_id, function ($query) use ($province_id) {
+                $query->whereHas('Province', function ($query) use ($province_id) {
+                    $query->where('province_id', $province_id);
+                });
+            })
+            ->when($request->input('title'), function ($query) use ($request) {
+                $query->where('title', $request->input('title'));
             })
 
             ->get();

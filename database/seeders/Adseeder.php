@@ -17,7 +17,7 @@ class Adseeder extends Seeder
        $ad1 = Advertisement::create([
             'organization_id'=>'1',
             'job_category_id'=>'1',
-            'title'=>'به دنبال کارگر برای بهرام فیلتر فروش',
+            'title'=>'گرافیست',
             'gender'=>'male',
             'type_of_cooperation'=>'full_time',
             'military_exemption'=>'Exempt',
@@ -27,7 +27,7 @@ class Adseeder extends Seeder
             'degree_of_education'=>'دیپلم',
             'address'=>'یه جایی تو تهران',
             'about'=>'فلان بهمان بیسار',
-            'Advantages'=>'یکسری فلان بهمان بیسار دیگر'
+            'Advantages'=>'میان وعده'
         ]);
         Skill::create([
             'model'=>'app/model/advertisement',
@@ -38,7 +38,7 @@ class Adseeder extends Seeder
        $ad2 = Advertisement::create([
             'organization_id'=>'2',
             'job_category_id'=>'1',
-            'title'=>'ممد سیگاری',
+            'title'=>'برنامه نویس فرانت ',
             'gender'=>'male',
             'type_of_cooperation'=>'full_time',
             'military_exemption'=>'Exempt',
@@ -47,8 +47,8 @@ class Adseeder extends Seeder
             'province_id'=>2,
             'degree_of_education'=>'دیپلم',
             'address'=>'یه جایی تو تهران',
-            'about'=>'فلان بهمان بیسار',
-            'Advantages'=>'یکسری فلان بهمان بیسار دیگر'
+            'about'=>'به یک فرانت کار حونیور نیاز مندیم',
+            'Advantages'=>'نهار میدن'
         ]);
         Skill::create([
             'model'=>'app/model/advertisement',
@@ -59,7 +59,7 @@ class Adseeder extends Seeder
         $ad3 = Advertisement::create([
             'organization_id'=>'2',
             'job_category_id'=>'1',
-            'title'=>'احمد سیگاری',
+            'title'=>'بکند دولوپر',
             'gender'=>'male',
             'type_of_cooperation'=>'full_time',
             'military_exemption'=>'Exempt',
@@ -67,9 +67,9 @@ class Adseeder extends Seeder
             'city_id'=>1,
             'province_id'=>2,
             'degree_of_education'=>'دیپلم',
-            'address'=>'یه جایی تو تهران',
-            'about'=>'فلان بهمان بیسار',
-            'Advantages'=>'یکسری فلان بهمان بیسار دیگر'
+            'address'=>' تهران',
+            'about'=>'به یک بکند کار حونیور نیاز مندیم',
+            'Advantages'=>'اضافه کار'
         ]);
         Skill::create([
             'model'=>'app/model/advertisement',
