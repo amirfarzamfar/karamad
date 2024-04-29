@@ -10,7 +10,7 @@ use App\Models\Phone_number_check;
 use App\Models\User;
 use Carbon\Carbon;
 
-class phoneNumberCheckController extends Controller
+class PhoneNumberCheckController extends Controller
 {
 
 
