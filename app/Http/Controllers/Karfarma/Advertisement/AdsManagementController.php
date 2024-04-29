@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAdRequest;
 use App\Http\Resources\AdManagement\AdvertisementResource;
 use App\Models\Advertisement;
 use App\Models\Organization;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 
 class AdsManagementController extends Controller
@@ -43,8 +44,8 @@ class AdsManagementController extends Controller
     public function editAdd(Request $request)
     {
 
-        $user = auth()->user();
-        $organization = Organization::where('user_id', $user->id)->first();
+        $user_id = auth()->id();
+        $organization = Organization::where('user_id', $user_id)->first();
         $advertisements = Advertisement::where('organization_id', $organization->id)->first();
 
 
@@ -62,8 +63,22 @@ class AdsManagementController extends Controller
             'organization_id'=>$request->organization_id,
             'status'=>$request->status
         ]);
+        self::updateSkill($request , $advertisements->id);
        return response()->json([
           'message' => 'آگهی آپدیت شد'
        ]);
+    }
+    public function updateSkill($request , $id): void //
+    {
+        $skills = $request->skill;
+        Skill::where('model_id' , $id)->where('model' , '=' ,'app/model/advertisement')->forceDelete();
+        foreach ($skills as $skill){
+            Skill::create([
+                'model'=>'app/model/advertisement',
+                'model_id'=>$id,
+                'skill_name'=>$skill['skill_name'],
+                'skill_percentage'=>$skill['skill_percentage']
+            ]);
+        }
     }
 }

@@ -19,11 +19,6 @@ use function storage_path;
 
 class CreateResumeController extends Controller
 {
-    public function index()
-    {
-
-    }
-
     public function create(ResumeRequest $request): JsonResponse
     {
         try {

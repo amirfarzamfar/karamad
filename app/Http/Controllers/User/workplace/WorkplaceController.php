@@ -8,6 +8,7 @@ use App\Models\About;
 use App\Models\Advertisement;
 use App\Models\Karamad_benefit;
 use App\Models\Karamad_tip;
+use App\Models\Organization;
 use App\Models\Reapeted_question;
 use App\Models\User;
 use function response;
@@ -15,66 +16,50 @@ use function response;
 class WorkplaceController extends Controller
 {
 
-    public function index()
-    {
-        try {
-            $Advertisements = self::Advertisements();
-
-            $Benefits = self::Benefits();
-
-            $Tips = self::Tips();
-
-            $Questions = self::Questions();
-
-            $Supports = self::Supports();
-
-            return (new WorkplaceCollection($Advertisements))->additional([
-                'benefits'=>$Benefits,
-                'tips'=>$Tips,
-                'questions'=>$Questions,
-                'support'=>$Supports
-            ]);
-        }catch (\Throwable $th){
-            return response()->json(
-                $th->getMessage()
-            );
-        }
-    }
     //
     public function Advertisements()
     {
-        $recentRecords = Advertisement::with(['jobCategory', 'City', 'Province'])
-            ->latest()
-            ->take(6)
-            ->get();
+        try {
+            $recentRecords = Advertisement::with(['jobCategory', 'Organization' , /*'City', 'Province'*/])
+                ->latest()
+                ->take(6)
+                ->get();
 
-        foreach ($recentRecords as $recentRecord){
-           $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
-           if($recentRecord->hasMedia()){
-             $image = $recentRecord->getMedia();
-             $Url = $image[0]->getUrl();
-             $recentRecord->setAttribute('avatar_url', $Url);
-           }
+            foreach ($recentRecords as $recentRecord){
+                $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
+                $Organization = Organization::find($recentRecord->Organization->id);
+                if($Organization->hasMedia('logo')){
+                    $image = $Organization->getMedia('logo');
+                    $Url = $image[0]->getUrl();
+                    $recentRecord->setAttribute('avatar_url', $Url);
+                }
+            }
+
+            $recentRecords = $recentRecords->sortByDesc('id')->values();
+
+            return new WorkplaceCollection($recentRecords);
+        }catch (\Throwable $th){
+            return response()->json([$th->getMessage()]);
         }
-
-        $recentRecords = $recentRecords->sortByDesc('id')->values();
-
-        return $recentRecords;
     }
     //
     public  function Benefits()
     {
+        try {
         $karamad_benefits = Karamad_benefit::take(4)->get();
 
         foreach ($karamad_benefits as $karamad_benefit){
             if ($karamad_benefit->title == 'کارفرما'){
-                /*$superAdminCount = User::with('roles')->get()->filter(
-                    fn ($user) => $user->roles->where('name', 'Super Admin')->toArray()
-                )->count();*/
-                $karamad_benefit->setAttribute('Karfarmas' , 'کارفرما'. User::count('id'));
+                $superAdminCount = User::with('roles')->get()->filter(
+                    fn ($user) => $user->roles->where('name', 'admin')->toArray()
+                )->count();
+                $karamad_benefit->setAttribute('Karfarmas' , 'کارفرما'. $superAdminCount);
             }
         }
-        return $karamad_benefits;
+        return new WorkplaceCollection($karamad_benefits);
+    }catch (\Throwable $th){
+        return response()->json([$th->getMessage()]);
+       }
     }
 
     public function Tips()
@@ -94,15 +79,23 @@ class WorkplaceController extends Controller
     //
     public function Questions()
     {
+        try{
         $Reapeted_resume = Reapeted_question::all();
 
-        return $Reapeted_resume;
+        return new WorkplaceCollection($Reapeted_resume);
+    }catch (\Throwable $th){
+       return response()->json([$th->getMessage()]);
+       }
     }
     //
     public function Supports()
     {
-        $KaramadSupport = About::all();
+        try {
+            $KaramadSupport = About::all();
 
-        return $KaramadSupport;
+            return new WorkplaceCollection($KaramadSupport);
+        }catch (\Throwable $th){
+            return response()->json([$th->getMessage()]);
+        }
     }
 }

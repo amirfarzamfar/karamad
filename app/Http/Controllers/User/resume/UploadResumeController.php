@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Educational_record;
 use App\Models\Personal_resume;
 use App\Models\Skill;
+use App\Models\User_data;
 use App\Models\Work_experience;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class UploadResumeController extends Controller
                 'graduation_year'=>$request->graduation_year,
                 'currently_studying'=>$request->currently_studying
             ]);
+            return response()->json('success');
         }catch (\Throwable $throwable){
             return response()->json($throwable->getMessage());
         }
@@ -37,6 +39,7 @@ class UploadResumeController extends Controller
                 'skill_name'=>$request->skill_name,
                 'skill_percentage'=>$request->skill_percentage
             ]);
+            return response()->json('success');
         }catch (\Throwable $throwable){
             return response()->json($throwable->getMessage());
         }
@@ -50,9 +53,10 @@ class UploadResumeController extends Controller
                 'job_title'=>$request->job_title,
                 'organization_name'=>$request->organization_name,
                 'start_of_work'=>$request->start_of_work,
-                'end_of_work'=>$request->end_of_work,
+                    'end_of_work'=>$request->end_of_work,
                 'currently_employed'=>$request->currently_employed
             ]);
+            return response()->json('success');
         }catch (\Throwable $throwable){
             return response()->json($throwable->getMessage());
         }
@@ -76,8 +80,25 @@ class UploadResumeController extends Controller
                 'name'=>$name,
                 'unique_name'=>$unique_name
             ]);
+            return response()->json('success');
         }catch (\Throwable $throwable){
             return response()->json($throwable->getMessage());
+        }
+    }
+
+    public function uploadImage(int $user_data_id , Request $request)
+    {
+        try {
+            $user_data = User_data::find($user_data_id);
+            if ($user_data->hasMedia()){
+                $mediaItems = $user_data->getMedia();
+                $mediaItems[0]->delete();
+            }
+            $user_data->addMediaFromRequest('image')->toMediaCollection();
+            return response()->json('success');
+        }catch (\Throwable $th)
+        {
+            return response()->json($th->getMessage());
         }
     }
 }

@@ -49,6 +49,8 @@ require __DIR__ . '/user/advertisement/advertisement.php';
 //admin
 require __DIR__ . '/admin/advertisement/advertisement.php';
 require __DIR__ . '/admin/resume/resume.php';
+require __DIR__ . '/admin/Organization/Organization.php';
+require __DIR__ . '/admin/Payment/Payment.php';
 
 //provinceCity
 require __DIR__ . '/ProvinceCity/ProvinceCity.php';
@@ -57,19 +59,8 @@ require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 require __DIR__ . '/Category/Category.php';
 
 
-Route::get('/download', function () {
-    try {
-        $file = 'files/1712046205scurm.pdf';
-        $filePath = \Illuminate\Support\Facades\Storage::path($file);
-
-        return response()->download($filePath);
-    } catch (\Throwable $th) {
-        return response()->json($th->getMessage());
-    }
-})->name('file.download');
-
-
 Route::post('/test', function (\Illuminate\Http\Request $request) {
   $x = base64_encode('ظاها');
     dd(base64_decode($x));
 });
+

@@ -11,14 +11,15 @@ use function response;
 
 class SetResumeStatusController extends Controller
 {
-    public function Set(Request $request , int $user_data_id)
+    public function Set(int $user_data_id , string $status)
     {
         try {
+
             $id= auth()->id();
             $organization = Organization::where('user_id' , $id)->first();
             $advertisement = Advertisement::where('organization_id' , $organization->id)->first();
             Advertisement_user_data::where('advertisement_id' , $advertisement->id)->where('user_data_id' , $user_data_id)->update([
-                'status'=>$request->status,
+                'status'=>$status,
             ]);
             return response()->json('success');
         }catch (\Throwable $th){

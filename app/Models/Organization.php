@@ -36,7 +36,7 @@ class Organization extends Model implements HasMedia
     {
         return $this->belongsTo(City::class);
     }
-    public function  province(): BelongsTo
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
