@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'checkAdminForResume' => \App\Http\Middleware\CheckAdminForResume::class,
         'checkUserForUploadResume' => \App\Http\Middleware\ResumeUploadChecker::class,
         'checkUserForDeleteResume' => \App\Http\Middleware\ResumeDeleteChecker::class,
+        'CheckAdminForPayment' => \App\Http\Middleware\CheckAdminForPayment::class,
+        'CheckPaymentCount'=>\App\Http\Middleware\CheckPaymentCount::class,
     ];
 }

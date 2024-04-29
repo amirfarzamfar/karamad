@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    protected $status = 'active';
     public function index()
     {
         try {
@@ -38,15 +39,19 @@ class PaymentController extends Controller
                 return response()->json($newPayment->message());
             }
 
-            Payment::create([
-                'user_id' => 2,
+            if (Payment::where('user_id' , auth()->id())->where('paid_at' ,'!=', null)->where('status' , 'active')->exists()){
+                $this->status = 'reserve';
+            }
+
+             Payment::create([
+                'user_id' => auth()->id(),
                 'payment_package_id' => $payment_package_id,
                 'amount' => $payment_package->price,
                 'transaction_id' => $newPayment->transactionId(),
                 'expired_at' => Carbon::now()->addDays($payment_package->advertisement_data_limit),
                 'limit' => $payment_package->advertisement_limit,
+                'status'=>$this->status
             ]);
-
             return response()->json($newPayment->paymentUrl());
         }catch (\Throwable $th){
             return response()->json($th->getMessage());

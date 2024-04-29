@@ -20,10 +20,17 @@ class WorkplaceController extends Controller
     public function Advertisements()
     {
         try {
-            $recentRecords = Advertisement::with(['jobCategory', 'Organization' , /*'City', 'Province'*/])
+            $recentRecords = Advertisement::with([
+                'jobCategory' => function ($query){
+                $query->select('id' , 'job_category_name');
+            },
+                'Organization'=> function ($query){
+                $query->select('id','organizations_name');
+            } ,
+                'City', 'Province'])
                 ->latest()
                 ->take(6)
-                ->get();
+                ->get(['title', 'type_of_cooperation' , 'salary','organization_id','job_category_id','province_id','city_id']);
 
             foreach ($recentRecords as $recentRecord){
                 $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
