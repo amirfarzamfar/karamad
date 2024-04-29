@@ -50,6 +50,8 @@ require __DIR__ . '/user/advertisement/advertisement.php';
 require __DIR__ . '/admin/advertisement/advertisement.php';
 require __DIR__ . '/admin/resume/resume.php';
 require __DIR__ . '/admin/Organization/Organization.php';
+require __DIR__ . '/admin/Payment/Payment.php';
+
 //provinceCity
 require __DIR__ . '/ProvinceCity/ProvinceCity.php';
 

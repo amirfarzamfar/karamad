@@ -48,19 +48,19 @@ class User extends Authenticatable implements HasMedia
 
 
 
-    public function is_phone_verified()
+    public function is_phone_verified(): bool
     {
         return !is_null($this->phone_number_verified_at);
     }
 
-    public function  phone_number_verified_at()
+    public function  phone_number_verified_at(): bool
     {
         return $this->forceFill([
             'phone_number_verified_at' => $this->freshTimestamp()
         ])->save();
     }
 
-    public function reset_pass_verified_at()
+    public function reset_pass_verified_at(): bool
     {
         return $this->forceFill([
             'reset_pass_verified_at' => $this->freshTimestamp()
@@ -72,7 +72,7 @@ class User extends Authenticatable implements HasMedia
         return !is_null($this->reset_pass_verified_at);
     }
 
-    public function undo_reset_pass_verified()
+    public function undo_reset_pass_verified(): bool
     {
         return $this->forceFill([
             'reset_pass_verified_at' => null
@@ -80,13 +80,13 @@ class User extends Authenticatable implements HasMedia
     }
 
 
-    public function advertisements()
+    public function advertisements(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Advertisement::class);
     }
 
 
-    public function organization()
+    public function organization(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Organization::class);
     }
@@ -96,7 +96,7 @@ class User extends Authenticatable implements HasMedia
     //        return $this->hasMany(Personal_resume::class);
     //    }
 
-    public function user_data()
+    public function user_data(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(user_data::class);
     }
@@ -107,15 +107,19 @@ class User extends Authenticatable implements HasMedia
     }
 
 
-    public function ticketAdmin()
+    public function ticketAdmin(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(TicketAdmin::class);
     }
 
-    public function chats()
+    public function chats(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Chat::class );
     }
 
+    public function payment(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Payment::class);
+    }
 
 }
