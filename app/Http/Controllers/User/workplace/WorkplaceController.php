@@ -30,7 +30,7 @@ class WorkplaceController extends Controller
                 'City', 'Province'])
                 ->latest()
                 ->take(6)
-                ->get(['title', 'type_of_cooperation' , 'salary','organization_id','job_category_id','province_id','city_id']);
+                ->get(['title', 'type_of_cooperation' , 'salary','organization_id','job_category_id','province_id','city_id' , 'id']);
 
             foreach ($recentRecords as $recentRecord){
                 $recentRecord->setAttribute('decoded_category' , base64_decode($recentRecord->jobCategory->job_category_name));
