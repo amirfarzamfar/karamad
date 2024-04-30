@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\PaymentPackage;
+use App\Models\Payment_package;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,7 @@ class PaymentPackagesSeeder extends Seeder
      */
     public function run(): void
     {
-        PaymentPackage::create([
+        Payment_package::create([
             'title'=>'یک اگهی',
             'price'=>95000,
             'advertisement_limit'=>1,

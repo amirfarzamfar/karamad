@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'checkUserForDeleteResume' => \App\Http\Middleware\ResumeDeleteChecker::class,
         'CheckAdminForPayment' => \App\Http\Middleware\CheckAdminForPayment::class,
         'CheckPaymentCount'=>\App\Http\Middleware\CheckPaymentCount::class,
+        'AdminLimit'=>\App\Http\Middleware\AdminLimit::class,
     ];
 }

@@ -21,7 +21,7 @@ class ResumeUploadChecker
         if($user_data->user_id == auth()->id()){
             return $next($request);
         }else{
-          return redirect()->back();
+            return \response()->json('you do not have permission');
         }
     }
 }

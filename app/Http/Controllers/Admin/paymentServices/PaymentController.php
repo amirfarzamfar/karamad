@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\paymentServices;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
-use App\Models\PaymentPackage;
+use App\Models\Payment_package;
 use Carbon\Carbon;
 use Evryn\LaravelToman\Facades\Toman;
 use Evryn\LaravelToman\CallbackRequest;
@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function index()
     {
         try {
-            $packages = PaymentPackage::all();
+            $packages = Payment_package::all();
             return response()->json($packages);
         }catch (\Throwable $th){
             return response()->json($th->getMessage());
@@ -28,7 +28,7 @@ class PaymentController extends Controller
     public function store(Request $request , int $payment_package_id): JsonResponse|RedirectResponse
     {
         try {
-            $payment_package = PaymentPackage::find($payment_package_id);
+            $payment_package = Payment_package::find($payment_package_id);
 
             $newPayment = Toman::amount($payment_package->price)
                 ->description($payment_package->title)

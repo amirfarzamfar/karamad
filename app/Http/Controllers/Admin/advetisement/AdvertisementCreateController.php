@@ -39,7 +39,7 @@ class AdvertisementCreateController extends Controller
             'military_exemption'=>$request->military_exemption,
             'salary'=>$request->salary,
             'city_id'=>$request->city,
-            'Province_id'=>$request->Province,
+            'province_id'=>$request->Province,
             'degree_of_education'=>$request->degree_of_education,
             'address'=>$request->address,
             'about'=>$request->about,

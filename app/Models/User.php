@@ -33,6 +33,7 @@ class User extends Authenticatable implements HasMedia
      */
     protected $hidden = [
         'password',
+        'password_confirmation',
         'remember_token',
     ];
 
@@ -117,9 +118,9 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Chat::class );
     }
 
-    public function payment(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function payment(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasOne(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 
 }

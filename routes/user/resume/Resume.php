@@ -21,7 +21,7 @@ Route::prefix('resume')->group(function (){
     Route::post('/upload/workExperience/{user_data_id}',[UploadResumeController::class , 'uploadWorkExperience'])->name('user.resume.upload.workExperience')/*->middleware('checkUserForUploadResume')*/;
     Route::post('/upload/personalResume/{user_data_id}',[UploadResumeController::class , 'uploadPersonalResume'])->name('user.resume.upload.personalResume')/*->middleware('checkUserForUploadResume')*/;
     Route::post('/upload/image/{user_data_id}',[UploadResumeController::class , 'uploadImage'])->name('user.resume.upload.image')/*->middleware('checkUserForUploadResume')*/;
-    Route::post('/download/{personalResume_id}',[DownloadResumeController::class , 'index'])->name('user.resume.download.resume')/*->middleware()*/;
+    Route::post('/download/user/{personalResume_id}',[DownloadResumeController::class , 'index'])->name('user.download.resume')/*->middleware()*/;
 
     Route::delete('/delete/educationalRecord/{educationalRecord_id}' , [DeleteResumeController::class , 'deleteEducationalRecord'])->name('user.Resume.educationalRecord.delete')/*->middleware('checkUserForDeleteResume')*/;
     Route::delete('/delete/Skills/{skill_id}' , [DeleteResumeController::class , 'deleteSkill'])->name('user.Resume.skill.delete')/*->middleware('checkUserForDeleteResume')*/;

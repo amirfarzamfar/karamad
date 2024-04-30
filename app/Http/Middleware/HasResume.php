@@ -18,7 +18,7 @@ class HasResume
     {
         $id = auth()->id();
         if (!User_data::where('user_id' , $id)->exists()){
-            return redirect()->route('user.Resume.workplace');
+            return \response()->json('you do not have resume');
         }
         return $next($request);
     }

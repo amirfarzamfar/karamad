@@ -50,7 +50,7 @@ class CreateResumeController extends Controller
             'military_exemption'=>$request->military_exemption,
             'email'=>$request->email,
             'city_id'=>$request->city,
-            'Province_id'=>$request->Province,
+            'province_id'=>$request->Province,
             'phone_number'=>$request->phone_number,
             'address'=>$request->address,
             'about_me'=>$request->about_me,
