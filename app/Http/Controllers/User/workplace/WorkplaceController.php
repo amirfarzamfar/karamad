@@ -60,7 +60,7 @@ class WorkplaceController extends Controller
                 $superAdminCount = User::with('roles')->get()->filter(
                     fn ($user) => $user->roles->where('name', 'admin')->toArray()
                 )->count();
-                $karamad_benefit->setAttribute('Karfarmas' , 'کارفرما'. $superAdminCount);
+                $karamad_benefit->setAttribute('Karfarmas' ,  $superAdminCount);
             }
         }
         return new WorkplaceCollection($karamad_benefits);
