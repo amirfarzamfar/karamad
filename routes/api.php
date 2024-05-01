@@ -51,6 +51,7 @@ require __DIR__ . '/admin/advertisement/advertisement.php';
 require __DIR__ . '/admin/resume/resume.php';
 require __DIR__ . '/admin/Organization/Organization.php';
 require __DIR__ . '/admin/Payment/Payment.php';
+require __DIR__ . '/admin/Counter/Counter.php';
 
 //provinceCity
 require __DIR__ . '/ProvinceCity/ProvinceCity.php';

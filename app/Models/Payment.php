@@ -12,12 +12,12 @@ class Payment extends Model
 
     protected $guarded = [];
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
-    public function package(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function payment_package(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(PaymentPackage::class);
+        return $this->belongsTo(Payment_package::class);
     }
 }

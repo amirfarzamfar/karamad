@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('failed_at')->nullable();
             $table->dateTime('paid_at')->nullable();
             $table->dateTime('expired_at')->nullable();
+            $table->enum('status' , ['active','reserve','not active'])->default('active');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

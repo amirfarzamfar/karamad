@@ -14,7 +14,7 @@ class UserProfileController extends Controller
 {
     public function index(): UserProfileResource|JsonResponse
     {
-        $id = 1;
+        $id = auth()->id();
 
         if( $id !== null){
             $user = User::find($id)->first();

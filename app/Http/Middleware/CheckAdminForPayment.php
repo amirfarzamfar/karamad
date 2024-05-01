@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User_data;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class HasResume
+class CheckAdminForPayment
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class HasResume
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $id = auth()->id();
-        if (!User_data::where('user_id' , $id)->exists()){
-            return \response()->json('you do not have resume');
+        if(User::where('id' , auth()->id())->role('admin')->exists()){
+            return $next($request);
+        }else{
+            return \response()->json('you do not have permission');
         }
-        return $next($request);
     }
 }
