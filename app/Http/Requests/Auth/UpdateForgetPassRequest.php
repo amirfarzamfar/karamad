@@ -23,7 +23,8 @@ class UpdateForgetPassRequest extends FormRequest
     {
         return [
             'phone_number' => ['required', 'regex:#^[0][9]\d{9}$#'],
-            'new_password' => ['required', 'string']
+            'password' => ['required', 'string','confirmed'],
+            'password_confirmation' => ['required', 'string',],
         ];
     }
 }

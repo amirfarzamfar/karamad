@@ -77,8 +77,11 @@ class PasswordController extends Controller
         $user = User::where('phone_number', $request->validated('phone_number'))->first();
 
         if ($user->is_reset_verified()) {
+
             $user->update([
-                'password' => $request->validated('new_password')
+                'password' => Hash::make($request->validated('new_password')),
+                'password_confirmation' => Hash::make($request->validated('password_confirmation')),
+
             ]);
 
             $user->undo_reset_pass_verified();

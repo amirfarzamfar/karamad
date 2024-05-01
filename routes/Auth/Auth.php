@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\GoogleAuthControlller;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\phoneNumberCheckController;
+use App\Http\Controllers\Auth\PhoneNumberCheckController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Karfarma\Auth\AdminLoginController;
@@ -20,7 +20,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::post('/register', RegisterController::class)->name('user.register');
 Route::post('/register_user', [UserRegisterController::class, 'create_user'])->name('user.create');
-Route::post('/number-check', [phoneNumberCheckController::class, 'number_check'])->name('phone-number-check');
+Route::post('/number-check', [PhoneNumberCheckController::class, 'number_check'])->name('phone-number-check');
 Route::post('/logout', LogoutController::class)->name('logout')->middleware('auth:sanctum')->name('user.logout');
 Route::post('/login', LoginController::class)->name('login');
 Route::post('/edit-user-profile', [EditUserController::class, 'edit_user_profile'])->middleware('auth:sanctum')->name('user.edit-user-profile');
