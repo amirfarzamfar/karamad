@@ -24,6 +24,7 @@ require __DIR__ . '/Auth/Auth.php';
 require __DIR__ . '/JobAd/JobAd.php';
 require __DIR__ . '/Filter/Filter.php';
 require __DIR__ . '/Ticket/Ticket.php';
+require __DIR__ . '/UserSidebar/UserSidbar.php';
 
 
 //user
@@ -47,7 +48,7 @@ require __DIR__ . '/Category/Category.php';
 
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-  $x = base64_encode('ظاها');
-    dd(base64_decode($x));
+  \App\Models\User::find(1)->addMedia($request->image)->toMediaCollection();
+  return 'ok ';
 });
 
