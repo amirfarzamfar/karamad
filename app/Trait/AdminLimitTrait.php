@@ -3,6 +3,8 @@
 namespace App\Trait;
 
 use App\Models\Payment;
+use App\Models\Payment_package;
+use Carbon\Carbon;
 
 trait AdminLimitTrait
 {
@@ -38,13 +40,20 @@ trait AdminLimitTrait
                 ->where('paid_at','!=',null)
                 ->where('status','=','reserve')
                 ->get();
+            $dateLimit = $this->adDateLimit($payment);
             Payment::find($payment[0]->id)->update([
                 'status'=>'active',
                 'limit'=>$payment[0]->limit - 1,
+                'expired_at' => Carbon::now()->addDays($dateLimit->advertisement_data_limit),
             ]);
             return true;
         }else{
             return false;
         }
+    }
+
+    public function adDateLimit($payment)
+    {
+       return Payment_package::find($payment[0]->payment_package_id);
     }
 }

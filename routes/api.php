@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Payment_package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,7 @@ require __DIR__ . '/Category/Category.php';
 
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-  $x = base64_encode('ظاها');
-    dd(base64_decode($x));
+  $x = Payment_package::find(1);
+    dd($x->advertisement_data_limit);
 });
 
