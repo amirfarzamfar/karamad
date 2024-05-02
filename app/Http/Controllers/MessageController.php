@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-;
 use App\Http\Requests\Ticket\StoreMessageRequest;
-
-
 use App\Http\Requests\Ticket\UpdateMessageRequest;
 use App\Http\Resources\ticket\MessageResource;
 use App\Models\Ticket\Chat;

@@ -26,20 +26,6 @@ require __DIR__ . '/Filter/Filter.php';
 require __DIR__ . '/Ticket/Ticket.php';
 
 
-
-
-
-
-
-//my middlewares hasResume / sendOnce / checkAdminForAd / checkAdminForResume
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
-Route::get('/', function () {
-    return redirect()->route('user.workplace');
-});
-
 //user
 require __DIR__ . '/user/workplace/Workplace.php';
 require __DIR__ . '/user/profile/Profile.php';
