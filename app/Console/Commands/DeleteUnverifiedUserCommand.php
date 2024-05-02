@@ -26,8 +26,9 @@ class DeleteUnverifiedUserCommand extends Command
      */
     public function handle()
     {
-        User::where('phone_verified_at', null)
+        User::where('phone_number_verified_at', null)
             ->where('created_at', '<', now()->subMinutes(4))
             ->delete();
+
     }
 }
