@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ShowOrganizationController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         try {
             $user_id = auth()->id();
