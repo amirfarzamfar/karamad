@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->command('app:delete-unverified-user-command');
+         $schedule->command('app:delete-unverified-user-command')->everyMinute();
     }
 
 
