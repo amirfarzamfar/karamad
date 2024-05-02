@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Payment_package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +24,7 @@ require __DIR__ . '/Auth/Auth.php';
 require __DIR__ . '/JobAd/JobAd.php';
 require __DIR__ . '/Filter/Filter.php';
 require __DIR__ . '/Ticket/Ticket.php';
+require __DIR__ . '/UserSidebar/UserSidbar.php';
 
 
 //user
@@ -48,7 +48,7 @@ require __DIR__ . '/Category/Category.php';
 
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-  $x = Payment_package::find(1);
-    dd($x->advertisement_data_limit);
+  \App\Models\User::find(1)->addMedia($request->image)->toMediaCollection();
+  return 'ok ';
 });
 

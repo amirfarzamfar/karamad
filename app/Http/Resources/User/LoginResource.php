@@ -24,7 +24,7 @@ class LoginResource extends JsonResource
                 "national_id" => $this->when($this->national_id != null, $this->national_id),
                 "name" => $this->when($this->name != null, $this->name),
                 "family" => $this->when($this->family != null, $this->family),
-//                "avatar" => $this->getFirstMediaUrl('avatar')
+                "avatar" => $this->getFirstMediaUrl('avatar')
             ],
 
 
