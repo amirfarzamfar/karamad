@@ -15,7 +15,9 @@ class UserRegisterController extends Controller
     public function create_user(CreateUserRequest $request)
     {
 
-        $user = User::where('phone_number', $request->input())->first();
+
+        $user = User::where('phone_number', $request->input('phone_number'))->first();
+
         if ($user) {
             if ($user->is_phone_verified()) {
                 $user->update([
@@ -26,6 +28,8 @@ class UserRegisterController extends Controller
                     'password_confirmation' => Hash::make($request->validated('password_confirmation')),
 
                 ]);
+
+
                 return response()->json([
                     'message' =>'Your account information has been registered'
                 ]);
