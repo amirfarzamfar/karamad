@@ -21,7 +21,7 @@ class DeleteOrganizationController extends Controller
             $this->collection = 'image_2';
         }
     }
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         try {
             $user_id = auth()->id();
