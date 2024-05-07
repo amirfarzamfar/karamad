@@ -12,8 +12,7 @@ class DeleteUnverifiedUserCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:delete-
-    -user-command';
+    protected $signature = 'app:delete-unverified-user-command';
 
     /**
      * The console command description.
