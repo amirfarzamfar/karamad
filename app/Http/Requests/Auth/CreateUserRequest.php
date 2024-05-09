@@ -26,7 +26,7 @@ class CreateUserRequest extends FormRequest
             'family' => 'string',
             'email'=> 'required|email|max:255|unique:users',
             'password' => ['required', 'string','confirmed'],
-            'password_confirmation' => ['required', 'string',],
+            'password_confirmation' => ['required', 'string'],
 
         ];
     }

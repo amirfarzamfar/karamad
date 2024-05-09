@@ -19,17 +19,17 @@ use function storage_path;
 
 class CreateResumeController extends Controller
 {
+    protected $user_data_id;
     public function create(ResumeRequest $request): JsonResponse
     {
 
         try {
             self::createUserData($request);
-            $user_data = User_data::where('user_id' , auth()->id())->first();
-            self::createEducationalRecord($request , $user_data->id);
-            self::createWorkExperience($request , $user_data->id);
-            self::createSkill($request , $user_data->id);
-            self::createSocialNetwork($request , $user_data->id);
-            self::createPersonalResume($request , $user_data->id);
+            self::createEducationalRecord($request , $this->user_data_id);
+            self::createWorkExperience($request , $this->user_data_id);
+            self::createSkill($request , $this->user_data_id);
+            self::createSocialNetwork($request , $this->user_data_id);
+            self::createPersonalResume($request , $this->user_data_id);
 
             return response()->json('success');
         }catch (\Throwable $th){
@@ -41,13 +41,13 @@ class CreateResumeController extends Controller
 
     public function createUserData($request): void //
     {
-        User_data::create([
+       $user_data =  User_data::create([
             'user_id'=> auth()->id(),
             'name'=>$request->name,
             'family'=>$request->family,
             'gender'=>$request->gender,
             'marital_status'=>$request->marital_status,
-            'year_of_birth'=>Carbon::create($request->year_of_birth),
+            'year_of_birth'=>$request->year_of_birth,
             'military_exemption'=>$request->military_exemption,
             'email'=>$request->email,
             'city_id'=>$request->city,
@@ -57,6 +57,7 @@ class CreateResumeController extends Controller
             'about_me'=>$request->about_me,
         ])->addMediaFromRequest('image')
             ->toMediaCollection();
+       $this->user_data_id = $user_data->id;
     }
 
     public function createEducationalRecord($request , $id): void //
@@ -70,8 +71,8 @@ class CreateResumeController extends Controller
                'grade' => $EducationalRecord['grade'],
                'field_of_study' => $EducationalRecord['field_of_study'],
                'university_name' => $EducationalRecord['university_name'],
-               'entering_year' => Carbon::create($EducationalRecord['entering_year']),
-               'graduation_year' =>isset($EducationalRecord['graduation_year']) ? Carbon::create($EducationalRecord['graduation_year']) : null,
+               'entering_year' => $EducationalRecord['entering_year'],
+               'graduation_year' => $EducationalRecord['graduation_year'] ?? null,
                'currently_studying' => $EducationalRecord['currently_studying'],
            ]);
        }
@@ -101,7 +102,7 @@ class CreateResumeController extends Controller
         ]);
     }
 
-    public function createWorkExperience($request , $id) //
+    public function createWorkExperience($request , $id): void //
     {
         $WorkExperiences = $request->workexperince;
 
@@ -111,13 +112,13 @@ class CreateResumeController extends Controller
                 'job_title'=>$workExperience['job_title'],
                 'organization_name'=>$workExperience['organization_name'],
                 'start_of_work'=>Carbon::create($workExperience['start_of_work']),
-                'end_of_work'=>isset($workExperience['end_of_work']) ? Carbon::create($workExperience['end_of_work']) : null,
+                'end_of_work'=> $workExperience['end_of_work'] ?? null,
                 'currently_employed'=>$workExperience['currently_employed'],
             ]);
         }
     }
 
-    public function createPersonalResume($request , $id)
+    public function createPersonalResume($request , $id): void
     {
         $personalResumes = $request->personalResume;
 
