@@ -19,16 +19,16 @@ use function storage_path;
 
 class CreateResumeController extends Controller
 {
+    protected $user_data_id;
     public function create(ResumeRequest $request): JsonResponse
     {
         try {
             self::createUserData($request);
-            $user_data = User_data::where('user_id' , auth()->id())->first();
-            self::createEducationalRecord($request , $user_data->id);
-            self::createWorkExperience($request , $user_data->id);
-            self::createSkill($request , $user_data->id);
-            self::createSocialNetwork($request , $user_data->id);
-            self::createPersonalResume($request , $user_data->id);
+            self::createEducationalRecord($request , $this->user_data_id);
+            self::createWorkExperience($request , $this->user_data_id);
+            self::createSkill($request , $this->user_data_id);
+            self::createSocialNetwork($request , $this->user_data_id);
+            self::createPersonalResume($request , $this->user_data_id);
 
             return response()->json('success');
         }catch (\Throwable $th){
@@ -40,7 +40,7 @@ class CreateResumeController extends Controller
 
     public function createUserData($request): void //
     {
-        User_data::create([
+       $user_data =  User_data::create([
             'user_id'=> auth()->id(),
             'name'=>$request->name,
             'family'=>$request->family,
@@ -56,6 +56,7 @@ class CreateResumeController extends Controller
             'about_me'=>$request->about_me,
         ])->addMediaFromRequest('image')
             ->toMediaCollection();
+       $this->user_data_id = $user_data->id;
     }
 
     public function createEducationalRecord($request , $id): void //
@@ -100,7 +101,7 @@ class CreateResumeController extends Controller
         ]);
     }
 
-    public function createWorkExperience($request , $id) //
+    public function createWorkExperience($request , $id): void //
     {
         $WorkExperiences = $request->workexperince;
 
@@ -116,7 +117,7 @@ class CreateResumeController extends Controller
         }
     }
 
-    public function createPersonalResume($request , $id)
+    public function createPersonalResume($request , $id): void
     {
         $personalResumes = $request->personalResume;
 
