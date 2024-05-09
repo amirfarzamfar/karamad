@@ -17,7 +17,7 @@ class WorkplaceController extends Controller
 {
 
     //
-    public function Advertisements()
+    public function Advertisements(): WorkplaceCollection|\Illuminate\Http\JsonResponse
     {
         try {
             $recentRecords = Advertisement::with([
@@ -50,7 +50,7 @@ class WorkplaceController extends Controller
         }
     }
     //
-    public  function Benefits()
+    public  function Benefits(): WorkplaceCollection|\Illuminate\Http\JsonResponse
     {
         try {
         $karamad_benefits = Karamad_benefit::take(4)->get();
@@ -84,7 +84,7 @@ class WorkplaceController extends Controller
        return $karamad_tips;
     }
     //
-    public function Questions()
+    public function Questions(): WorkplaceCollection|\Illuminate\Http\JsonResponse
     {
         try{
         $Reapeted_resume = Reapeted_question::all();
@@ -95,7 +95,7 @@ class WorkplaceController extends Controller
        }
     }
     //
-    public function Supports()
+    public function Supports(): WorkplaceCollection|\Illuminate\Http\JsonResponse
     {
         try {
             $KaramadSupport = About::all();
