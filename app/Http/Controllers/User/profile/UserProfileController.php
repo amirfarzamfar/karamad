@@ -17,10 +17,10 @@ class UserProfileController extends Controller
         $id = auth()->id();
 
         if( $id !== null){
-            $user = User::find($id)->first();
+            $user = User::find($id);
 
             if ($user->hasMedia()){
-                $image = User::find($id)->getMedia();
+                $image = $user->getMedia();
 
                 $avatar_id = $image[0]->getUrl();
             }else{
