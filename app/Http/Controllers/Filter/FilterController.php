@@ -23,13 +23,24 @@ class FilterController extends Controller
     public function newestJobAd()
     {
 
+        $newestAds = Advertisement::with('Organization')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
-        $newestAd = Advertisement::orderBy('created_at', 'desc')->paginate(10);
+        $arr = [];
+        foreach ($newestAds as $newestAd) {
+            if ($newestAd->Organization) {
+                $arr[] = [
+                    'organization_name' => $newestAd->Organization->organizations_name,
+                    'organization_logo' => $newestAd->Organization->getFirstMediaUrl('logo'),
+                    'advertisements' => new AdvertisementResource($newestAd),
+                ];
+            }
+        }
 
         return response()->json([
             'message' => 'newestJobAd',
-//            'newestJobAd' => $newestAd
-            AdvertisementResource::collection($newestAd)
+            'arr' => $arr
         ]);
 
     }
@@ -94,9 +105,12 @@ class FilterController extends Controller
     public function SearchJobAd(Request $request)
     {
 
+
         $job_category_id = $request->input('job_category_id');
         $city_id = $request->input('city_id');
         $province_id = $request->input('province_id');
+        $organizations_name = $request->input('organizations_name');
+
         $advertisements = Advertisement::when($job_category_id, function ($query) use ($job_category_id) {
             $query->whereHas('jobCategory', function ($query) use ($job_category_id) {
                 $query->where('job_category_id', $job_category_id);
@@ -113,12 +127,34 @@ class FilterController extends Controller
                 });
             })
             ->when($request->input('title'), function ($query) use ($request) {
-                $query->where('title', $request->input('title'));
+                $query->where('title','like', '%'.$request->input('title').'%');
+            })
+            ->when($organizations_name , function ($query) use ($organizations_name){
+                $query->whereHas('Organization' , function ($query) use ($organizations_name){
+                    $query->where('organizations_name','like','%'.$organizations_name.'%');
+                });
             })
 
             ->get();
 
-        return $advertisements;
+
+        $arr = [];
+        foreach ($advertisements as $advertisement) {
+            if ($advertisement->Organization || $advertisement->jobCategory ) {
+                $arr[] = [
+                    'organization_name' => $advertisement->Organization->organizations_name,
+                    'organization_logo' => $advertisement->Organization->getFirstMediaUrl('logo'),
+                    'advertisements' => new AdvertisementResource($advertisement),
+                ];
+            }
+        }
+
+        return response()->json([
+            'message' => 'newestJobAd',
+            'arr' => $arr
+        ]);
+
+
     }
 
 }

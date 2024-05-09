@@ -21,6 +21,7 @@ class CreateResumeController extends Controller
 {
     public function create(ResumeRequest $request): JsonResponse
     {
+
         try {
             self::createUserData($request);
             $user_data = User_data::where('user_id' , auth()->id())->first();
@@ -142,3 +143,5 @@ class CreateResumeController extends Controller
         }
     }
 }
+
+

@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\AdManagement;
 
+use App\Http\Resources\OrganizationResource;
+use App\Http\Resources\ticket\MessageResource;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,9 +28,13 @@ class AdvertisementResource extends JsonResource
             'degree_of_education' => $this->degree_of_education,
             'address' => $this->address,
             'about' => $this->about,
-            'organization_id' => $this->organization_id,
             'status' => $this->status,
 
+
+//            'organizations_name' => $this->organizations_id->organizations_name,
+//            'organizations_name' => $this->when($this->organizations_name->isNotEmpty(), OrganizationResource::collection($this->organizations_name)),
+
         ];
+
     }
 }
