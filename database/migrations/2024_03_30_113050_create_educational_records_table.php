@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('university_name');
             $table->date('entering_year')->nullable();
             $table->date('graduation_year')->nullable();
-            $table->enum('currently_studying',['yes' , null])->nullable()->default(null);
+            $table->enum('currently_studying',['true' , 'false'])->nullable()->default(null);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
