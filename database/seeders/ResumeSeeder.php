@@ -39,7 +39,7 @@ class ResumeSeeder extends Seeder
             'university_name' =>'تهران شمال',
             'entering_year' => '1395-10-10',
             'graduation_year' => null ,
-            'currently_studying' =>'yes' ,
+            'currently_studying' =>'true' ,
         ]);
         Skill::create([
             'model'=>'app/model/resume',
@@ -59,7 +59,7 @@ class ResumeSeeder extends Seeder
             'organization_name'=>'makfa',
             'start_of_work'=>'1395-10-10',
             'end_of_work'=>null,
-            'currently_employed'=>'employed',
+            'currently_employed'=>'true',
         ]);
     }
 }
