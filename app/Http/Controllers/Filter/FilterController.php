@@ -150,9 +150,10 @@ class FilterController extends Controller
         }
 
         return response()->json([
-            'message' => 'newestJobAd',
+            'message' => 'آگهی های جستجو شده',
             'arr' => $arr
         ]);
+
 
 
     }

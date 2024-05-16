@@ -36,7 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::post('/register', RegisterAdminController::class)->name('user.register');
     Route::post('/number-check', [AdminPhoneNumberCheckController::class, 'admin_number_check'])->name('phone-number-check');
-    Route::post('/register_admin_information',[AdminRegisterInformationController::class,'createAdminInformation'])->name('create_admin');
+    Route::post('/register_admin_information',[AdminRegisterInformationController::class,'organizationCreate'])->name('create_admin');
 //    Route::post('/admin_information',[AdminRegisterInformationController::class,'createAdminInformation'])->name('create_admin');
     Route::post('/login', AdminLoginController::class)->name('login');
     Route::post('/logout', AdminLogoutController::class)->middleware('auth:sanctum')->name('logout');

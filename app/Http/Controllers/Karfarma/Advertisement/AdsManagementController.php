@@ -21,9 +21,10 @@ class AdsManagementController extends Controller
 
     public function allAds(Request $request)
     {
-        $user = $request->user();
 
+        $user = $request->user();
         $organization = Organization::where('user_id', $user->id)->first();
+
 
         $advertisements = Advertisement::where('organization_id', $organization->id)
             ->latest()

@@ -30,10 +30,6 @@ class AdvertisementResource extends JsonResource
             'about' => $this->about,
             'status' => $this->status,
 
-
-//            'organizations_name' => $this->organizations_id->organizations_name,
-//            'organizations_name' => $this->when($this->organizations_name->isNotEmpty(), OrganizationResource::collection($this->organizations_name)),
-
         ];
 
     }

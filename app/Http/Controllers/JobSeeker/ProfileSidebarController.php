@@ -99,14 +99,21 @@ class ProfileSidebarController extends Controller
     {
         $user = auth()->user();
         $user_data = $user->user_data;
-        $posted_resume = Advertisement_user_data::where('user_data_id',$user_data->id)->get();
 
+        if ($user_data != null) {
+            $posted_resume = Advertisement_user_data::where('user_data_id', $user_data->id)->paginate(10);
 
-        return response()->json([
-            'postedResume'=> $posted_resume
-        ]);
-
+            return response()->json([
+                'postedResume'=> $posted_resume
+            ]);
+        }else{
+            return response()->json([
+               'message' => 'you dont have posted resume'
+            ]);
+        }
     }
+
+
 
 
 }

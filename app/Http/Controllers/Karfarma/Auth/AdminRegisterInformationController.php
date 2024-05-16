@@ -15,26 +15,27 @@ use Illuminate\Support\Facades\Hash;
 class AdminRegisterInformationController extends Controller
 {
 
-    public $user_id;
-    public function createAdminInformation(Request $request)
+//    public $user_id;
+//    public function createAdminInformation(Request $request)
+//    {
+//
+//        try {
+//
+//           self::createAdminData($request);
+//            self::organizationCreate($request);
+//
+//
+//            return response()->json('success');
+//        }catch (\Throwable $th){
+//            return response()->json(
+//                $th->getMessage()
+//            );
+//        }
+//    }
+
+    public function organizationCreate(Request $request)
     {
-
-        try {
-
-           self::createAdminData($request);
-            self::organizationCreate($request);
-
-
-            return response()->json('success');
-        }catch (\Throwable $th){
-            return response()->json(
-                $th->getMessage()
-            );
-        }
-    }
-
-    public function createAdminData($request)
-    {
+//        dd($request);
         $phoneNumber = $request->input('phone_number');
         $admin = User::where('phone_number', $phoneNumber)->with('organization')->first();
         $this->user_id = $admin->id;
@@ -42,15 +43,20 @@ class AdminRegisterInformationController extends Controller
         if ($admin) {
             if ($admin->is_phone_verified()) {
 
-                $admin->update([
-                    'name' => $request->input('name'),
-                    'family' => $request->input('family'),
-                    'email' => $request->input('email'),
-                    'national_id' => $request->input('national_id'),
-                    'password' => Hash::make($request->input('password')),
-                    'password_confirmation' => Hash::make($request->input('password_confirmation')),
-
-                ]);
+                Organization::create([
+                    'user_id' => $this->user_id,
+                    'job_category_id'=> $request->input('job_category_id'),
+                    'organizations_name'=>$request->input('organizations_name'),
+                    'organizations_phone_number'=>$request->input('organizations_phone_number'),
+                    'organizations_email'=>$request->input('organizations_email'),
+                    'organizations_about'=>$request->input('organizations_about'),
+                    'province_id'=>$request->input('province_id'),
+                    'city_id'=>$request->input('city_id'),
+                    'organizations_address'=>$request->input('organizations_address'),
+                    'organizations_web_address'=>$request->input('organizations_web_address'),
+                    'number_of_staff'=>$request->input('number_of_staff'),
+                ])->addMediaFromRequest('image')
+                    ->toMediaCollection('OrganizationLogo');
 
 
                 return response()->json([
@@ -71,23 +77,7 @@ class AdminRegisterInformationController extends Controller
 
             }
 
-            public function organizationCreate($request)
-            {
 
-                Organization::create([
-                    'user_id' => $this->user_id,
-                    'job_category_id'=> $request->input('job_category_id'),
-                    'organizations_name'=>$request->input('organizations_name'),
-                    'organizations_phone_number'=>$request->input('organizations_phone_number'),
-                    'organizations_email'=>$request->input('organizations_email'),
-                    'organizations_about'=>$request->input('organizations_about'),
-                    'province_id'=>$request->input('province_id'),
-                    'city_id'=>$request->input('city_id'),
-                    'organizations_address'=>$request->input('organizations_address'),
-                    'organizations_web_address'=>$request->input('organizations_web_address'),
-                    'number_of_staff'=>$request->input('number_of_staff')
-                ]);
-            }
 }
 
 
