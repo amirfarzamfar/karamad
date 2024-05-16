@@ -55,8 +55,11 @@ class CreateResumeController extends Controller
             'phone_number'=>$request->phone_number,
             'address'=>$request->address,
             'about_me'=>$request->about_me,
-        ])->addMediaFromRequest('image')
-            ->toMediaCollection();
+        ]);
+       if ($request->image !== null) {
+           $user_data->addMediaFromRequest('image')
+               ->toMediaCollection();
+       }
        $this->user_data_id = $user_data->id;
     }
 

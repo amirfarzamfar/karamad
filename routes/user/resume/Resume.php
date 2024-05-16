@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('resume')->group(function (){
     Route::get('/workplace' , [ShowResumeController::class , 'userSeeResume'])->name('user.Resume.workplace')->middleware('auth:sanctum');
-    Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create')/*->middleware('auth:sanctum')*/;
+    Route::post('/create' , [CreateResumeController::class , 'create'])->name('user.Resume.create')->middleware('auth:sanctum');
     Route::post('/send/{advertisement_id}' , [SendResumeController::class , 'send'])->whereNumber('advertisement_id')->name('user.Resume.send')->middleware(['auth:sanctum','hasResume','sendOnce']);
     Route::post('/upload/educationalRecord/{user_data_id}',[UploadResumeController::class , 'uploadEducationalRecord'])->name('user.resume.upload.educationalRecord')->middleware(['auth:sanctum','checkUserForUploadResume','']);
     Route::post('/upload/skills/{user_data_id}',[UploadResumeController::class , 'uploadSkill'])->name('user.resume.upload.skill')->middleware(['auth:sanctum','checkUserForUploadResume']);

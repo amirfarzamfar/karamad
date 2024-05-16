@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('organization_name');
             $table->date('start_of_work')->nullable();
             $table->date('end_of_work')->nullable();
-            $table->enum('currently_employed',['employed','unemployed']);
+            $table->enum('currently_employed',['true','false'])->default('false');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
