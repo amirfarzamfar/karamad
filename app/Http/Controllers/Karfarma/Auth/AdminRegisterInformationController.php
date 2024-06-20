@@ -43,7 +43,7 @@ class AdminRegisterInformationController extends Controller
         if ($admin) {
             if ($admin->is_phone_verified()) {
 
-                Organization::create([
+                $organization = Organization::create([
                     'user_id' => $this->user_id,
                     'job_category_id'=> $request->input('job_category_id'),
                     'organizations_name'=>$request->input('organizations_name'),
@@ -55,8 +55,12 @@ class AdminRegisterInformationController extends Controller
                     'organizations_address'=>$request->input('organizations_address'),
                     'organizations_web_address'=>$request->input('organizations_web_address'),
                     'number_of_staff'=>$request->input('number_of_staff'),
-                ])->addMediaFromRequest('image')
-                    ->toMediaCollection('OrganizationLogo');
+                ]);
+
+                if ($request->hasFile('image')) {
+                    $organization->addMediaFromRequest('image')->toMediaCollection('OrganizationLogo');
+                }
+
 
 
                 return response()->json([
